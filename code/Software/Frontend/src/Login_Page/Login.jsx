@@ -52,23 +52,24 @@ const Login = () => {
     id="password"
     value={password}
     onChange={(e) => setPassword(e.target.value)}
-    placeholder="strong password"
+    placeholder="Password"
     required
   />
 </div>
         <div>
-          <button type="submit">Login</button>
+          <button className="login_button" type="submit">Login</button>
         </div>
         
-        <div className="remember-me">
-          <input
-            type="checkbox"
-            id="rememberMe"
-            checked={rememberMe}
-            onChange={(e) => setRememberMe(e.target.checked)}
-          />
-          <label htmlFor="rememberMe">Remember me</label></div>
+        
+          <label className="form-check-label">
+            <input type="checkbox" 
+            className="form-check-input" 
+            id="rememberMe" 
+            checked={rememberMe} 
+            onChange={(e)=> setRememberMe(e.target.checked)}/>
 
+              <small> Remember Me</small>
+          </label>
       </form>
       <p>
         Don't have an account? <Link to="/register">Sign Up</Link>

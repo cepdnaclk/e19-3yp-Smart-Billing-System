@@ -4,8 +4,13 @@ import "./Invoices.css";
 function Invoices() {
   const [invoices, setInvoices] = useState([]);
   const [newInvoice, setNewInvoice] = useState({});
+  const formattedNewInvoice = {
+    data: [newInvoice]
+  };
+  
 
   const handleCreate = async () => {
+    console.log("Creating invoice:", newInvoice);
     try {
       const response = await fetch("http://localhost:5555/bill/", {
         method: "POST",
@@ -13,6 +18,7 @@ function Invoices() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(newInvoice),
+        
       });
   
       if (!response.ok) {
@@ -38,7 +44,7 @@ function Invoices() {
   const handleUpdate = async (id, updatedData) => {
     const { updatedInvoiceId, updatedDate, updatedAmount } = updatedData;
 
-  // Display the update space
+  //Display the update space
   document.getElementById("update-space").style.display = "block";
 
   // Populate the updated data in the space
@@ -60,7 +66,7 @@ function Invoices() {
     } catch (error) {
       console.error("Error updating invoice:", error);
     }
-  };
+  };*/
 
   const handleDelete = async (id) => {
     try {
@@ -69,11 +75,11 @@ function Invoices() {
       });
 
       // Remove the deleted invoice from the state
-      setInvoices(invoices.filter((invoice) => invoice.id !== id));
+        setInvoices(invoices.filter((invoice) => invoice._id !== id));
     } catch (error) {
       console.error("Error deleting invoice:", error);
     }
-  };*/
+  };
   
   useEffect(() => {
     const fetchData = async () => {
@@ -125,7 +131,7 @@ function Invoices() {
                 <button onClick={() => handleUpdate(invoice.id, {/* Updated data */})}>
                   Update
                 </button>
-                <button onClick={() => handleDelete(invoice.id)}>Delete</button>
+            <button onClick={() => handleDelete(invoice._id)}>Delete</button>
               </td>
             </tr>
           ))}
@@ -141,8 +147,8 @@ function Invoices() {
           <label>Amount:</label>
           <input
             type="text"
-            value={newInvoice.amount || ""}
-            onChange={(e) => setNewInvoice({ ...newInvoice, amount: e.target.value })}
+            value={newInvoice.totalAmount || ""}
+            onChange={(e) => setNewInvoice({ ...newInvoice, totalAmount: e.target.value })}
           />
           
           <label>Payment Method:</label>

@@ -14,6 +14,9 @@ import {
 const router = express.Router();
 router.use(cors());
 
+// Route for get top selling products
+//router.get("/topselling", getTopSellingProducts);
+
 // Route for get total sale today
 router.get("/saletoday", getProductsSoldToday);
 
@@ -33,6 +36,7 @@ router.put("/:id", updateItemsPurchased);
 
 // Route for delete purchased item by id
 router.delete("/:id", deleteItemsPurchasedById);
+
 
 
 export default router;

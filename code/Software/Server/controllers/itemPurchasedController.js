@@ -239,4 +239,4 @@ export const getTotalProductQuantities = async () => {
             throw error;
         }
     };
-   
+    

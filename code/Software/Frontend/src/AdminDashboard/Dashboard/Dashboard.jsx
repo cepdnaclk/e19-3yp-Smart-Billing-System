@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faDollarSign, faChartBar } from '@fortawesome/free-solid-svg-icons';
 import './Dashboard.css'; 
+import TopProducts from './TopProducts'; 
+import TopSellingProducts from './TopSellingProducts';
 
 
 const Dashboard = () => {
@@ -11,7 +13,7 @@ const Dashboard = () => {
   const [totalSaleYesterday, setTotalSaleYesterday] = useState(0);
   const [percentageChange, setPercentageChange] = useState(0);
 
-  const [totalBillToday, setTotalBillToday] = useState(0);
+  const [billCountToday, setTotalBillToday] = useState(0);
   const [totalBillYesterday, setTotalBillYesterday] = useState(0);
   const [percentageChangeBills, setPercentageChangeBills] = useState(0);
 
@@ -43,10 +45,11 @@ const Dashboard = () => {
         console.log(data);
 
         // Destructure data and set state for bills
-        const { totalBillToday, totalBillYesterday, percentageChange } = data;
-        setTotalBillToday(totalBillToday);
+        const { billCountToday, totalBillYesterday, percentageChange } = data;
+        setTotalBillToday(billCountToday);
         setTotalBillYesterday(totalBillYesterday);
         setPercentageChangeBills(percentageChange);
+        
       } catch (error) {
         console.error('Error fetching bill data:', error);
       }
@@ -102,7 +105,7 @@ const Dashboard = () => {
 
                 <h5 className="card-title text-center">
                   <FontAwesomeIcon icon={faShoppingCart} size="2x" color="#754c09" /><br /><br />
-                  <p className="card-text">{totalBillToday}</p>
+                  <p className="card-text">{billCountToday}</p>
                   Total Bills
                 </h5>
                 <p>{percentageChangeBills}% from yesterday</p>
@@ -125,43 +128,9 @@ const Dashboard = () => {
         </div>
       </div>
     </div><br/><br/>
-
-<div >
-<h2>Top Selling Products</h2>
-<p>View and Manage your top selling products</p>
-<br />
-<div className="container_for_topselling bg-white">
-  <div className="row row-1 row-3-md-2 g-4">
-    <div className="col">
-      <div className="card square-card_topselling" >
-        <div className="card-body_topselling"> 
-        image will be here         
-            <p className="card-text">product name</p> 
-            <p className="card-text">sold count</p>
-        </div>
-      </div>
-    </div>
-    <div className="col">
-      <div className="card square-card_topselling" >
-        <div className="card-body_topselling">
-        image will be here 
-            <p className="card-text">product name</p> 
-            <p className="card-text">sold count</p>
-        </div>
-      </div>
-    </div>
-    <div className="col">
-      <div className="card square-card_topselling" >
-        <div className="card-body_topselling">
-        image will be here 
-            <p className="card-text">product name</p>
-            <p className="card-text">sold count</p> 
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</div></div>
+<TopSellingProducts/>
+<br/><br/>
+<TopProducts/></div>
   );
 };
 

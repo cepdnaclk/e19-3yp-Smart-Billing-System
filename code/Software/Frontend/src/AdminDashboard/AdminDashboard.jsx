@@ -15,7 +15,7 @@ function AdminDashboard(){
       <div className={`container-fluid`}  >
         <div className="row bg-light">
          
-          <div className="col-auto col-md-5 col-xl-2 px-sm-2 px-0 bg-white" >
+          <div className="col-12 col-md-5 col-xl-2 px-sm-2 px-0 bg-white" >
             <div className="d-flex flex-column align-items-start px-3 pt-2 min-vh-100">
 
           

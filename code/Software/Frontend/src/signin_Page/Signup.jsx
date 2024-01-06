@@ -119,7 +119,7 @@ const Signup = () => {
           {!isPasswordMatch && <p className="error-text">Passwords do not match</p>}
         </div>
         <div>
-        <button type="submit" onClick={redirectToRoot}>Sign Up</button>
+        <button className='login_button' type="submit" onClick={redirectToRoot}>Sign Up</button>
 
         </div>
 

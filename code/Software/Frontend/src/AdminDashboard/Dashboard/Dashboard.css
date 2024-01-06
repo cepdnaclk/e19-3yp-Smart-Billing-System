@@ -24,24 +24,3 @@
     padding: 40px;
    
   }
-
-  .container_for_topselling {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    max-width: 900px;
-    border-radius: 25px;
-   
-  }
-  .square-card_topselling {
-    height: 90%;
-    border-radius: 1px; 
-    aspect-ratio: 1/1;
-    border-color: rgb(45, 49, 49);
-    margin: 0;
-    margin-top: 15px;
-    height: 20vh;
-  }
-  .card-body_topselling{
-    padding: 2px;
-  }
