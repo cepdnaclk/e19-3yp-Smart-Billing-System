@@ -10,6 +10,7 @@ module org.group17.pos {
     exports org.group17.pos;
     exports org.group17.pos.controllers;
     exports org.group17.pos.models;
+    exports org.group17.pos.views;
     exports org.group17.pos.services;
     exports org.group17.pos.utils;
 
