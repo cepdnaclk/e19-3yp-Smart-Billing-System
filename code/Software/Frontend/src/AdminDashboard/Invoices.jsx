@@ -4,11 +4,25 @@ import "./Invoices.css";
 function Invoices() {
   const [invoices, setInvoices] = useState([]);
   const [newInvoice, setNewInvoice] = useState({});
-  const formattedNewInvoice = {
-    data: [newInvoice]
-  };
+  const [updateSpaceVisible, setUpdateSpaceVisible] = useState(false);
+  const [updatedInvoiceData, setUpdatedInvoiceData] = useState({});
+  const [updateFormData, setUpdateFormData] = useState({
+    totalAmount: "",
+    paymentMethod: "",
+    discountApplied: "",
+  });
   
+  const handleUpdateInputChange = (e, id) => {
+    const { name, value } = e.target;
 
+    setUpdateFormData((prevData) => ({
+      ...prevData,
+      [id]: {
+        ...prevData[id],
+        [name]: value,
+      },
+    }));
+  };
   const handleCreate = async () => {
     console.log("Creating invoice:", newInvoice);
     try {
@@ -40,34 +54,40 @@ function Invoices() {
     }
   };
   
-/*
-  const handleUpdate = async (id, updatedData) => {
-    const { updatedInvoiceId, updatedDate, updatedAmount } = updatedData;
 
-  //Display the update space
-  document.getElementById("update-space").style.display = "block";
-
-  // Populate the updated data in the space
-  document.getElementById("updated-invoice-id").innerText = updatedInvoiceId;
-  document.getElementById("updated-date").innerText = updatedDate;
-  document.getElementById("updated-amount").innerText = updatedAmount;
+  const handleUpdate = async (id) => {
+    //console.log("Updating invoice:", id);
+    console.log("Updated invoice data:", updateFormData);
     try {
       const response = await fetch(`http://localhost:5555/bill/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(updatedData),
+        body: JSON.stringify(updateFormData[id]),
       });
 
+      if (!response.ok) {
+        throw new Error(`Failed to update invoice. Status: ${response.status}`);
+      }
+
       const updatedInvoice = await response.json();
-      // Update the state with the updated invoice
-      setInvoices(invoices.map((invoice) => (invoice.id === _id ? updatedInvoice : invoice)));
+      console.log("Updated invoice:", updatedInvoice);
+      setInvoices(invoices.map((invoiceItem) => (invoiceItem._id === id ? { ...updatedInvoice } : invoiceItem)));
+
+      setUpdatedInvoiceData({
+        updatedInvoiceId: updatedInvoice._id,
+        updatedDate: updatedInvoice.createdAt,
+        updatedAmount: updatedInvoice.totalAmount,
+      });
+
+      // Set update space visible
+      setUpdateSpaceVisible(true);
     } catch (error) {
       console.error("Error updating invoice:", error);
     }
-  };*/
-
+  };
+  
   const handleDelete = async (id) => {
     try {
       await fetch(`http://localhost:5555/bill/${id}`, {
@@ -120,24 +140,61 @@ function Invoices() {
           </tr>
         </thead>
         <tbody>
-          {invoices.map((invoice) => (
-            <tr key={invoice._id}>
-              <td>{invoice._id}</td>
-              <td>{invoice.createdAt}</td>
-              <td>{invoice.totalAmount}</td>
-              <td>{invoice.discountApplied}</td>
-              <td>{invoice.paymentMethod}</td>
-              <td>
-                <button onClick={() => handleUpdate(invoice.id, {/* Updated data */})}>
-                  Update
-                </button>
-            <button onClick={() => handleDelete(invoice._id)}>Delete</button>
-              </td>
-            </tr>
-          ))}
+        {invoices.map((invoice) => (
+  <tr key={invoice._id}>
+    <td>{invoice._id}</td>
+    <td>{invoice.createdAt}</td>
+    <td>{invoice.totalAmount}
+    <form >
+        
+        <input
+          type="text"
+          name="totalAmount"
+          value={updateFormData[invoice._id]?.totalAmount || ""}
+          onChange={(e) => handleUpdateInputChange(e, invoice._id)}
+          style={{ width: '70px' }}
+        />
+    </form>
+    </td>
+
+    <td>{invoice.discountApplied}
+    <form className="custom-form">
+    
+        <input
+          type="text"
+          name="discountApplied"
+          value={updateFormData[invoice._id]?.discountApplied || ""}
+          onChange={(e) => handleUpdateInputChange(e, invoice._id)}
+          style={{ width: '90px'}}
+        /></form>
+    </td>
+    <td>{invoice.paymentMethod}
+    <form >
+            
+                <input
+                type="text"
+                name="paymentMethod"
+                value={updateFormData[invoice._id]?.paymentMethod || ""}
+                onChange={(e) => handleUpdateInputChange(e, invoice._id)}
+                style={{ width: '100px' }}
+                />
+    </form>
+    </td>
+    <td>
+      
+
+        <button type="button" onClick={() => handleUpdate(invoice._id)}>
+          Update
+        </button>
+      
+      <button onClick={() => handleDelete(invoice._id)}>Delete</button>
+    </td>
+  </tr>
+))}
+
+         
         </tbody>
       </table>
-
 
 
             <br/><br/> <br/>
