@@ -43,6 +43,9 @@ Introducing the Smart Billing System, a cutting-edge solution for supermarkets d
 
 ## Security & Testing
 
+![image](https://github.com/cepdnaclk/e19-3yp-Smart-Billing-System/assets/115539818/3877477c-eaca-47b4-8817-54ba98b279f5)
+
+
 
 
 
