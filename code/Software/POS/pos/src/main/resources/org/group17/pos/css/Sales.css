@@ -1,0 +1,83 @@
+.main_menu_container {
+    -fx-background-color: #ffffff;
+    -fx-alignment: center;
+}
+
+.title {
+    -fx-font-size: 2.6em;
+    -fx-font-family: "Bebas Neue Bold";
+    -fx-text-fill: #000000;
+}
+
+.date {
+    -fx-font-size: 1.5em;
+    -fx-font-family: "Bebas Neue Regular";
+    -fx-text-fill: #000000;
+}
+
+.table_container {
+    /*-fx-background-color: #FFFFFF;*/
+    -fx-background-radius: 10 0 0 10;
+    -fx-padding: 10 0 10 0;
+    -fx-alignment: center;
+    -fx-spacing: 10;
+}
+
+.table_container HBox {
+    -fx-alignment: center-right;
+    -fx-padding: 0 15 0 0;
+}
+
+#lblTotal {
+    -fx-font-size: 1.3em;
+    -fx-font-family: "Bebas Neue Bold";
+    -fx-text-fill: #000000;
+}
+
+.table_container HBox Label {
+    -fx-font-size: 1.3em;
+    -fx-font-family: "Bebas Neue Regular";
+    -fx-text-fill: #000000;
+}
+
+.table_container Button {
+    -fx-pref-width: 730;
+    -fx-pref-height: 20;
+    -fx-background-color: #1fce3c;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 1.7em;
+    -fx-alignment: center;
+    -fx-font-family: "Bebas Neue Bold";
+    -fx-effect: dropshadow(three-pass-box, #DDDDDD, 6, 0, 0, 1);
+}
+
+.table_container Button:hover {
+    -fx-background-color: #1b922e;
+    -fx-cursor: hand;
+}
+
+.table_container FontAwesomeIconView {
+    -fx-fill: #FFFFFF;
+}
+
+.table-view .column-header,
+.table-view .column-header-background .filler {
+    -fx-background-color:  #000000;
+}
+.table-view .column-header .label{
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-alignment: center-left;
+}
+.table-view .cell{
+    -fx-cell-size: 35;
+    -fx-alignment: center-left;
+    -fx-background-color: #29292D;
+    -fx-border-color: #29292D;
+    -fx-text-fill: lightgray;
+
+}
+.table-row-cell:selected {
+    -fx-background-color: whitesmoke;
+    -fx-text-background-color: #a0a0a0;
+}
