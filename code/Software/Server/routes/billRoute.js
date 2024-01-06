@@ -6,7 +6,8 @@ import {
     saveNewBill,
     updateBill,
     deleteBillById,
-    getBillsToday
+    getBillsToday,
+    getBillCountPerdate
 } from "../controllers/billController.js";
 
 const router = express.Router();
@@ -14,6 +15,7 @@ const router = express.Router();
 // Route for get bills today
 router.get("/today", getBillsToday);
 
+router.get("/billCountPerDay/:day",getBillCountPerdate)
 // Route for get all bills
 router.get("/", getAllBills);
 

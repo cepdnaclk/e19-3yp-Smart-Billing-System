@@ -173,3 +173,27 @@ export async function getBillsToday(request, response) {
     
       return ((currentValue - previousValue) / Math.abs(previousValue)) * 100;
     }
+    export async function getBillCountPerdate(request, response) {
+        try {
+          const { day } = request.params;
+          
+          // Parse the day parameter to a Date object
+          const selectedDay = new Date(day);
+          selectedDay.setHours(0, 0, 0, 0); // Set hours, minutes, seconds, and milliseconds to 0
+      
+          // Get bills created on the selected day
+          const billsOnSelectedDay = await Bill.find({
+            createdAt: { $gte: selectedDay, $lt: new Date(selectedDay.getTime() + 24 * 60 * 60 * 1000) },
+          });
+      
+          // Calculate the bill count for the selected day
+          const billCountSelectedDay = billsOnSelectedDay.length;
+      
+          response.status(200).json({ billCountSelectedDay });
+        } catch (error) {
+          console.error(error.message);
+          response.status(500).json({ error: 'An error occurred while fetching the bill count for the selected day.' });
+        }
+      }
+      
+      

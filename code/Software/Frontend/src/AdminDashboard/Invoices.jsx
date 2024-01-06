@@ -152,7 +152,7 @@ function Invoices() {
           name="totalAmount"
           value={updateFormData[invoice._id]?.totalAmount || ""}
           onChange={(e) => handleUpdateInputChange(e, invoice._id)}
-          style={{ width: '70px' }}
+          style={{ width: '70px',height:'27px',borderRadius:'1px'}}
         />
     </form>
     </td>
@@ -165,7 +165,7 @@ function Invoices() {
           name="discountApplied"
           value={updateFormData[invoice._id]?.discountApplied || ""}
           onChange={(e) => handleUpdateInputChange(e, invoice._id)}
-          style={{ width: '90px'}}
+          style={{ width: '90px',height:'27px',borderRadius:'1px'}}
         /></form>
     </td>
     <td>{invoice.paymentMethod}
@@ -176,7 +176,7 @@ function Invoices() {
                 name="paymentMethod"
                 value={updateFormData[invoice._id]?.paymentMethod || ""}
                 onChange={(e) => handleUpdateInputChange(e, invoice._id)}
-                style={{ width: '100px' }}
+                style={{ width: '100px' ,height:'27px',borderRadius:'1px'}}
                 />
     </form>
     </td>

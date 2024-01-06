@@ -20,7 +20,8 @@ router.use(cors());
 // Route for get total sale today
 router.get("/saletoday", getProductsSoldToday);
 
-router.get("/quantity", getTotalProductQuantities);
+// Route for get total product quantities in today
+router.get("/quantity/t", getTotalProductQuantities);
 
 // Route for get all purchased item
 router.get("/", getAllItemsPurchased);

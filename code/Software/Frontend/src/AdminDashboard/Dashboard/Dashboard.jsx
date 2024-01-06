@@ -57,7 +57,7 @@ const Dashboard = () => {
 
     const fetchProductQuantities = async () => {
       try {
-        const response = await axios.get("http://localhost:5555/itemPurchased/quantity");
+        const response = await axios.get("http://localhost:5555/itemPurchased/quantity/t");
         const data = response.data;
         console.log(data);
 
@@ -95,7 +95,7 @@ const Dashboard = () => {
                   <p className="card-text">LKR {totalSaleToday}</p>
                   Total Sales
                 </h5>
-                <p>{percentageChange}%  from yesterday</p>
+                <p>{percentageChange.toFixed(0)}%  from yesterday</p>
               </div>
             </div>
           </div>
@@ -108,7 +108,7 @@ const Dashboard = () => {
                   <p className="card-text">{billCountToday}</p>
                   Total Bills
                 </h5>
-                <p>{percentageChangeBills}% from yesterday</p>
+                <p>{percentageChangeBills.toFixed(0)}% from yesterday</p>
               </div>
             </div>
           </div>

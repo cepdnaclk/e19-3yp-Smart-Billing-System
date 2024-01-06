@@ -214,29 +214,26 @@ export async function deleteItemsPurchasedById(request, response) {
 }
 
 export const getTotalProductQuantities = async () => {
-        try {
-            // Get the current date
-            const today = moment().startOf('day');
-    
-            // Use Mongoose aggregation to sum the total quantities
-            const result = await ItemPurchased.aggregate([
-                {
-                    $match: {
-                        createdAt: { $gte: today.toDate() },
-                    },
-                },
-                {
-                    $group: {
-                        _id: null,
-                        totalQuantity: { $sum: "$quantity" },
-                    },
-                },
-            ]);
-    
-            return result.length > 0 ? result[0].totalQuantity : 0;
-        } catch (error) {
-            console.error("Error fetching total product sold:", error);
-            throw error;
-        }
-    };
-    
+    try {
+  
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        // Get items purchased today
+        const itemsPurchased = await ItemPurchased.find({
+            createdAt: { $gte: today },
+        });
+
+        // Calculate the total quantity by summing the quantity field
+        const totalQuantity = itemsPurchased.reduce(
+            (total, item) => total + item.quantity,
+            0
+        );
+
+        return totalQuantity;
+    } catch (error) {
+     
+        console.error("Error fetching total product sold:", error);
+        throw error;
+    }
+};
