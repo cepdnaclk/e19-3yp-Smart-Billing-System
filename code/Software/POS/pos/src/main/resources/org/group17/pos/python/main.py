@@ -18,5 +18,5 @@ def scan_qr_code(image_path):
 
 
 # Replace 'path_to_your_image.png' with the actual path to your image file
-image_file_path = 'C:/Users/pasin/OneDrive/Documents/GitHub/e19-3yp-Smart-Billing-System/code/Software/POS/pos/src/main/resources/org/group17/pos/python/bar.png'
+image_file_path = 'C:/Users/pasin/OneDrive/Documents/GitHub/e19-3yp-Smart-Billing-System/code/Software/POS/pos/src/main/resources/org/group17/pos/python/barcode.png'
 scan_qr_code(image_file_path)

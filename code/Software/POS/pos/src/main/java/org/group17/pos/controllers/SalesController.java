@@ -1,6 +1,7 @@
 package org.group17.pos.controllers;
 
-import javafx.beans.Observable;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
@@ -10,9 +11,14 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.group17.pos.models.Test;
+import org.group17.pos.services.ApiService;
 import org.group17.pos.services.PythonScriptRunner;
 
 import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class SalesController implements Initializable {
@@ -28,6 +34,9 @@ public class SalesController implements Initializable {
     public Label lblTotalValue;
     public Button btnPay;
     public Button btnScanItem;
+    ObservableList<Test> testList = FXCollections.observableArrayList();
+    public double total=0.00;
+
 
 
 //    ObservableList<Test> testList = FXCollections.observableArrayList(
@@ -50,6 +59,15 @@ public class SalesController implements Initializable {
 //        colAmount.setCellValueFactory(new PropertyValueFactory<Test,Double>("amount"));
 //
 //        tblSales.setItems(testList);
+        LocalDate currentDate = LocalDate.now();
+
+        // Print the current date in the default format (yyyy-MM-dd)
+        System.out.println("Current Date: " + currentDate);
+
+        // You can also format the date as a string with a specific pattern
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+        String formattedDate = currentDate.format(formatter);
+        lblDate.setText(formattedDate);
         addListeners();
     }
 
@@ -62,5 +80,53 @@ public class SalesController implements Initializable {
         String scriptName = "main.py";
         String result = PythonScriptRunner.runPythonScript(scriptName);
         System.out.println("Python script output:\n" + result);
+
+        assert result != null;
+        result = result.replace("\n", "").replace("\r", "");
+
+        // Encode the result before appending it to the URL
+        String encodedResult = URLEncoder.encode(result, StandardCharsets.UTF_8);
+        System.out.println("Encoded Python script output:\n" + encodedResult);
+
+        String url = "https://smart-billing-system-50913e9a24e6.herokuapp.com/product/productid/" + encodedResult;
+        JsonElement jsonResponse = ApiService.sendGetRequest(url);
+
+        JsonObject jsonObject = null;
+        if (jsonResponse != null) {
+            System.out.println("Response: " + jsonResponse.getAsJsonArray().get(0));
+            jsonObject = (JsonObject) jsonResponse.getAsJsonArray().get(0);
+            System.out.println(jsonObject);
+            System.out.println(jsonObject.get("productName"));
+        } else {
+            System.out.println("Failed to retrieve JSON response.");
+        }
+        assert jsonObject != null;
+
+        String productID = String.valueOf(jsonObject.get("productID"));
+        productID = productID.replace("\"", "");
+        String productName = String.valueOf(jsonObject.get("productName"));
+        productName = productName.replace("\"", "");
+        System.out.println(productName + " " + productID);
+
+        String category = "Food";
+        String description = "Can eat";
+        double unitPrice = Double.parseDouble(String.valueOf(jsonObject.get("price")));
+        int quantity = Integer.parseInt(String.valueOf(jsonObject.get("quantityInStock")));
+//        double amount = Double.valueOf(String.valueOf(jsonObject.get("amount")));
+        testList.add(new Test(productID, productName, category, description, unitPrice, quantity));
+
+        colProductID.setCellValueFactory(new PropertyValueFactory<>("productID"));
+        colProductName.setCellValueFactory(new PropertyValueFactory<>("productName"));
+        colCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
+        colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+        colUnitPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
+        colQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        colAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
+
+        tblSales.setItems(testList);
+        total = total + (unitPrice * quantity);
+        lblTotalValue.setText(String.format("%.2f",total) + " LKR");
+
+
     }
 }
