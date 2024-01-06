@@ -45,4 +45,8 @@ public class ViewFactory {
         stage.setTitle("Smart Billing System");
         stage.show();
     }
+
+    public void closeStage(Stage stage){
+        stage.close();
+    }
 }
