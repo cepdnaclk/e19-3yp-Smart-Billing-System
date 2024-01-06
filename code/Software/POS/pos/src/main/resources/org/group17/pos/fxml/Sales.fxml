@@ -23,7 +23,7 @@
     </Label>
     <Label fx:id="lblDate" alignment="TOP_LEFT" layoutX="10.0" layoutY="10.0" styleClass="date" text="2024/01/06" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0" />
     <VBox prefHeight="600.0" prefWidth="730.0" styleClass="table_container" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="100.0">
-      <Button id="btnAddItem" fx:id="btnAddItem" mnemonicParsing="false" text=" Scan Item">
+      <Button id="btnAddItem" fx:id="btnScanItem" mnemonicParsing="false" text=" Scan Item">
          <graphic>
             <FontAwesomeIconView glyphName="CAMERA" size="18" />
          </graphic>

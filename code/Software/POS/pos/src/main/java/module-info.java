@@ -4,6 +4,7 @@ module org.group17.pos {
     requires de.jensd.fx.glyphs.fontawesome;
     requires java.sql;
     requires org.xerial.sqlitejdbc;
+    requires com.google.gson;
 
 
     opens org.group17.pos to javafx.fxml;

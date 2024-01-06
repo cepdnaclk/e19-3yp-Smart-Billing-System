@@ -10,6 +10,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.group17.pos.models.Test;
+import org.group17.pos.services.PythonScriptRunner;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -26,7 +27,7 @@ public class SalesController implements Initializable {
     public TableColumn<Test, Double> colAmount;
     public Label lblTotalValue;
     public Button btnPay;
-    public Button btnAddItem;
+    public Button btnScanItem;
 
 
 //    ObservableList<Test> testList = FXCollections.observableArrayList(
@@ -49,5 +50,17 @@ public class SalesController implements Initializable {
 //        colAmount.setCellValueFactory(new PropertyValueFactory<Test,Double>("amount"));
 //
 //        tblSales.setItems(testList);
+        addListeners();
+    }
+
+    private void addListeners() {
+        btnScanItem.setOnAction(event -> scanItem());
+    }
+
+    public void scanItem() {
+        // Use PythonRunner class to execute Python scripts from resources
+        String scriptName = "main.py";
+        String result = PythonScriptRunner.runPythonScript(scriptName);
+        System.out.println("Python script output:\n" + result);
     }
 }

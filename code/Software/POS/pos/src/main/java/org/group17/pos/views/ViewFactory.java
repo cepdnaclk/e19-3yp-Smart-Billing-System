@@ -1,5 +1,7 @@
 package org.group17.pos.views;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -9,19 +11,50 @@ import org.group17.pos.Main;
 import org.group17.pos.controllers.DashboardController;
 
 public class ViewFactory {
+    private final StringProperty dashboardSelectedMenuItem;
     private AnchorPane salesView;
+    private AnchorPane productsView;
+    private AnchorPane reportsView;
 
-    public ViewFactory(){}
+    public ViewFactory(){
+        this.dashboardSelectedMenuItem = new SimpleStringProperty("");
+    }
+
+    public StringProperty getDashboardSelectedMenuItem() {
+        return dashboardSelectedMenuItem;
+    }
 
     public AnchorPane getSalesView(){
         if(salesView == null){
             try{
-                salesView = new FXMLLoader(getClass().getResource("/fxml/Sales.fxml")).load();
+                salesView = new FXMLLoader(Main.class.getResource("fxml/Sales.fxml")).load();
             }catch (Exception e){
                 e.printStackTrace();
             }
         }
         return salesView;
+    }
+
+    public AnchorPane getProductsView() {
+        if(productsView == null){
+            try{
+                productsView = new FXMLLoader(Main.class.getResource("fxml/Products.fxml")).load();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return productsView;
+    }
+
+    public AnchorPane getReportsView() {
+        if(reportsView == null){
+            try{
+                reportsView = new FXMLLoader(Main.class.getResource("fxml/Reports.fxml")).load();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return reportsView;
     }
 
     public void showDashboardWindow(){
