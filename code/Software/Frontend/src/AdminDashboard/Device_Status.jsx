@@ -67,7 +67,7 @@ function Device_Status() {
                 `Received message: ${message.toString()} from topic: ${topic}`
             );
 
-            const status = JSON.parse(message.toString()).status;
+            const status = JSON.parse(message.toString()).data.device_status;
 
             // Update state based on the controller type
             if (topic === mainControllerTopic) {
