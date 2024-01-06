@@ -33,7 +33,7 @@ HX711 scale;
 const int LOADCELL_DOUT_PIN = 14;
 const int LOADCELL_SCK_PIN = 13;
 
-const float knownWeight = 5000;
+const float knownWeight = 240;
 
 // const char* ca_cert = 
 // "-----BEGIN CERTIFICATE-----\n"
@@ -108,6 +108,47 @@ void reconnect() {
   }
 }
 
+float calibrate(){
+  float scaleFactor = 1.0;  // Initial scale factor
+
+  // Set up the scale
+  scale.set_scale();
+
+  // Tare the scale to zero
+  scale.tare();
+
+  // Place the known weight on the scale and measure it
+  Serial.println("Place the known weight on the scale to calibrate.");
+
+  Serial.println("5 sec");
+  delay(1000);
+  Serial.println("4 sec");
+  delay(1000);
+  Serial.println("3 sec");
+  delay(1000);
+  Serial.println("2 sec");
+  delay(1000);
+  Serial.println("1 sec");
+  delay(1000);
+
+  float measuredWeight = scale.get_units(10); // Read the weight
+  Serial.print("Measured weight: ");
+  Serial.print(measuredWeight);
+  Serial.println(" g");
+
+  // Calculate the scale factor
+  scaleFactor = measuredWeight / knownWeight;
+
+  // Apply the scale factor to the HX711 instance
+  scale.set_scale(scaleFactor);
+
+  // Print the calibration factor for reference
+  Serial.print("Calibration factor: ");
+  Serial.println(scaleFactor);
+
+  return scaleFactor;
+}
+
 void setup() {
   // Initialize tft screen
   tft.init();
@@ -118,7 +159,10 @@ void setup() {
   scale.begin(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);
   scale.set_scale();
   scale.tare();
-  scale.set_scale(0.424);
+  scale.set_scale(2302.42);
+
+  // For first time calibration
+  // scale.set_scale(calibrate());
 
   tft.setCursor(0,0,2);
   tft.fillScreen(TFT_BLACK);
@@ -128,6 +172,8 @@ void setup() {
   tft.fillScreen(TFT_BLACK);
   tft.println("Connecting to WiFi");
   Serial.println("Connecting to WiFi...");
+
+  // Connect to WiFi
   WiFi.begin(ssid, password);
   
   while (WiFi.status() != WL_CONNECTED) {
@@ -135,6 +181,7 @@ void setup() {
     tft.print(".");
     Serial.print(".");
   }
+
   tft.println("");
   tft.println("WiFi connected");
   delay(500);
@@ -151,7 +198,7 @@ void setup() {
 void loop() {
   if (!client.connected()) {
     client.connect("MyESP32Client");
-    // reconnect();
+    // reconnect(); // commented due to not working in public broker
     tft.setCursor(0,0,2);
     tft.fillScreen(TFT_BLACK);
     tft.println("mqtt reconnecting");
@@ -162,7 +209,7 @@ void loop() {
   // Read from Load Cell
   long loadValue;
   if (scale.is_ready()) {
-    loadValue = scale.get_units();
+    loadValue = scale.get_units(20);
 
     // Create a JSON object
     StaticJsonDocument<200> doc; // Adjust the capacity as per your JSON object size
@@ -186,21 +233,24 @@ void loop() {
     client.publish(mqttTopic, charBuf);
     tft.setCursor(0,0,2);
     tft.fillScreen(TFT_BLACK);
-    tft.print("Topic : ");
-    Serial.print("Topic : ");
-    tft.println(mqttTopic);
-    Serial.println(mqttTopic);
-    delay(500);
+    // tft.print("Topic : ");
+    // Serial.print("Topic : ");
+    // tft.println(mqttTopic);
+    // Serial.println(mqttTopic);
+    // delay(500);
+
+    tft.setCursor(0,0,2);
+    tft.fillScreen(TFT_BLACK);
+    tft.print("Value : ");
+    Serial.print("Value : ");
+    tft.println(loadValue);
+    Serial.println(loadValue);
+    // delay(2000);
+
   }
   else{
       loadValue = -1;
   }
 
-  tft.setCursor(0,0,2);
-  tft.fillScreen(TFT_BLACK);
-  tft.print("Value : ");
-  Serial.print("Value : ");
-  tft.print(loadValue);
-  Serial.print(loadValue);
-  delay(2000);
+  
 }
