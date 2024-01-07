@@ -27,7 +27,7 @@ def scan_qr_code_from_url(image_url):
         print(f"Error: {e}")
 
 # Replace 'YOUR_IMAGE_URL' with the URL of the image you want to scan
-image_url = 'http://192.168.137.221/capture'
+image_url = 'http://192.168.137.102/capture'
 scan_qr_code_from_url(image_url)
 
 os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
@@ -66,10 +66,12 @@ for image_file in image_files:
     class_name = class_names[index].strip()
     confidence_score = prediction[0][index]
         # print(confidence_score)
-
-    print(class_name[2:])
+    if confidence_score>0.85:
+        print(class_name[2:])
+        # print(confidence_score)
+    
       
-    image_files = [f for f in os.listdir(input_directory) if f.endswith(('.jpg', '.jpeg', '.png'))]
+    # image_files = [f for f in os.listdir(input_directory) if f.endswith(('.jpg', '.jpeg', '.png'))]
         
     keyboard_input = cv2.waitKey(1)
  

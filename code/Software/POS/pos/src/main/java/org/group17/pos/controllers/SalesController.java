@@ -23,6 +23,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SalesController implements Initializable {
     public Label lblDate;
@@ -84,12 +86,32 @@ public class SalesController implements Initializable {
 
     public void scanItem() {
         // Use PythonRunner class to execute Python scripts from resources
-        String scriptName = "main2.py";
+        String scriptName = "main.py";
         String result = PythonScriptRunner.runPythonScript(scriptName);
         System.out.println("Python script output:\n" + result);
-
         assert result != null;
         result = result.replace("\n", "").replace("\r", "");
+        System.out.println("Python script output:\n" + result);
+        Pattern pattern = Pattern.compile("step\\s*(.+)");
+
+        // Create a matcher
+        Matcher matcher = pattern.matcher(result);
+
+        // Find the matching substring
+        String match = null;
+        if (matcher.find()) {
+            // Extract the matched portion (group 1)
+            match = matcher.group(1);
+
+            // Print the result
+            System.out.println("Extracted string after 'step': " + match);
+        } else {
+            System.out.println("No match found.");
+        }
+
+        result = match;
+        assert result != null;
+//        result = result.replace("\n", "").replace("\r", "");
 
         // Encode the result before appending it to the URL
         String encodedResult = URLEncoder.encode(result, StandardCharsets.UTF_8);
@@ -132,7 +154,7 @@ public class SalesController implements Initializable {
 
         tblSales.setItems(testList);
         total = total + (unitPrice * quantity);
-        lblTotalValue.setText(String.format("%.2f",total) + " LKR");
+        lblTotalValue.setText(String.format("%.2f", total) + " LKR");
     }
 
     public void pay() {
