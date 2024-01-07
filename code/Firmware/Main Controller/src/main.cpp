@@ -33,7 +33,8 @@ HX711 scale;
 const int LOADCELL_DOUT_PIN = 14;
 const int LOADCELL_SCK_PIN = 13;
 
-const float knownWeight = 240;
+const float knownWeight = 100;
+const int pinToCheck = 19; // Pin to monitor for the high signal
 
 // const char* ca_cert = 
 // "-----BEGIN CERTIFICATE-----\n"
@@ -118,17 +119,26 @@ float calibrate(){
   scale.tare();
 
   // Place the known weight on the scale and measure it
+  tft.print("Place : ");
+  tft.println(knownWeight);
   Serial.println("Place the known weight on the scale to calibrate.");
 
+  tft.print("5...");
   Serial.println("5 sec");
   delay(1000);
+  tft.print("4...");
   Serial.println("4 sec");
   delay(1000);
+  tft.print("3...");
   Serial.println("3 sec");
   delay(1000);
+  tft.print("2...");
   Serial.println("2 sec");
   delay(1000);
+  tft.print("1...");
   Serial.println("1 sec");
+  delay(1000);
+  tft.println("Calibration Complete");
   delay(1000);
 
   float measuredWeight = scale.get_units(10); // Read the weight
@@ -153,16 +163,28 @@ void setup() {
   // Initialize tft screen
   tft.init();
   tft.setRotation(1);
+  pinMode(pinToCheck, INPUT);
   Serial.begin(115200);
+
+  int pinValue = digitalRead(pinToCheck); // Read the value of the pin
 
   // Initialize load cell
   scale.begin(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);
   scale.set_scale();
   scale.tare();
-  scale.set_scale(2302.42);
 
-  // For first time calibration
-  // scale.set_scale(calibrate());
+  if (pinValue == HIGH) {
+    // For first time calibration
+    tft.setCursor(0,0,2);
+    tft.fillScreen(TFT_BLACK);
+    tft.println("Calibrating Mode");
+    delay(1000);
+    scale.set_scale(calibrate());
+  }
+  else{
+    // For subsequent runs
+    scale.set_scale(2302.42);
+  }
 
   tft.setCursor(0,0,2);
   tft.fillScreen(TFT_BLACK);
@@ -197,7 +219,7 @@ void setup() {
 
 void loop() {
   if (!client.connected()) {
-    client.connect("MyESP32Client");
+    client.connect("ESP32_MAIN_Client");
     // reconnect(); // commented due to not working in public broker
     tft.setCursor(0,0,2);
     tft.fillScreen(TFT_BLACK);
