@@ -1,0 +1,56 @@
+{
+    "version": 1,
+    "author": "Akash Withanaarachchi",
+    "editor": "wokwi",
+    "parts": [
+        {
+            "type": "board-esp32-devkit-c-v4",
+            "id": "esp",
+            "top": 67.2,
+            "left": -158.36,
+            "attrs": {}
+        },
+        {
+            "type": "wokwi-ili9341",
+            "id": "lcd1",
+            "top": -344.8,
+            "left": -192.3,
+            "attrs": {}
+        },
+        {
+            "type": "wokwi-hx711",
+            "id": "cell1",
+            "top": 185,
+            "left": 50.6,
+            "attrs": { "type": "5kg" }
+        }
+    ],
+    "connections": [
+        ["esp:TX", "$serialMonitor:RX", "", []],
+        ["esp:RX", "$serialMonitor:TX", "", []],
+        ["esp:5V", "lcd1:VCC", "red", ["h-86.25", "v-240", "h96"]],
+        ["esp:15", "lcd1:CS", "green", ["v0", "h28.8", "v-220.8", "h-96"]],
+        ["esp:4", "lcd1:RST", "green", ["h38.4", "v-201.6", "h-96"]],
+        ["esp:2", "lcd1:D/C", "green", ["h48", "v-230.4", "h-96"]],
+        ["lcd1:GND", "esp:GND.2", "black", ["v115.2", "h96", "v57.6"]],
+        ["esp:23", "lcd1:MOSI", "green", ["h57.6", "v-115.2", "h-96"]],
+        ["esp:18", "lcd1:SCK", "green", ["h67.2", "v-192", "h-96"]],
+        ["esp:19", "lcd1:MISO", "green", ["h86.4", "v-192", "h-96"]],
+        ["lcd1:LED", "lcd1:VCC", "red", ["v28.8", "h-67.21"]],
+        ["esp:GND.2", "cell1:GND", "black", ["v0", "h96", "v115.2"]],
+        ["esp:5V", "cell1:VCC", "red", ["h0.15", "v19.2", "h192", "v-48"]],
+        [
+            "esp:13",
+            "cell1:SCK",
+            "orange",
+            ["h-28.65", "v67.2", "h211.2", "v-67.2"]
+        ],
+        [
+            "esp:14",
+            "cell1:DT",
+            "orange",
+            ["h-38.25", "v105.6", "h211.2", "v-86.4"]
+        ]
+    ],
+    "dependencies": {}
+}

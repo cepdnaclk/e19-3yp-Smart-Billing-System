@@ -1,0 +1,18 @@
+# PlatformIO folders and files
+.pio/
+lib/
+.pioenvs/
+.vscode/
+*.iml
+
+# Compiled files
+*.bin
+*.elf
+
+# System and IDE files
+.DS_Store
+.settings/
+*.sublime-workspace
+*.sublime-project
+/.idea/
+/.vs/
