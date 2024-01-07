@@ -10,16 +10,19 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.group17.pos.models.Model;
 import org.group17.pos.models.Test;
 import org.group17.pos.services.ApiService;
 import org.group17.pos.services.PythonScriptRunner;
+import org.json.JSONObject;
 
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class SalesController implements Initializable {
     public Label lblDate;
@@ -36,6 +39,9 @@ public class SalesController implements Initializable {
     public Button btnScanItem;
     ObservableList<Test> testList = FXCollections.observableArrayList();
     public double total=0.00;
+    public ArrayList<String> idList = new ArrayList<String>();
+    public Map<String, Double> idMap = new ConcurrentHashMap<>();
+
 
 
 
@@ -73,11 +79,12 @@ public class SalesController implements Initializable {
 
     private void addListeners() {
         btnScanItem.setOnAction(event -> scanItem());
+        btnPay.setOnAction(event -> pay());
     }
 
     public void scanItem() {
         // Use PythonRunner class to execute Python scripts from resources
-        String scriptName = "main.py";
+        String scriptName = "main2.py";
         String result = PythonScriptRunner.runPythonScript(scriptName);
         System.out.println("Python script output:\n" + result);
 
@@ -96,7 +103,9 @@ public class SalesController implements Initializable {
             System.out.println("Response: " + jsonResponse.getAsJsonArray().get(0));
             jsonObject = (JsonObject) jsonResponse.getAsJsonArray().get(0);
             System.out.println(jsonObject);
-            System.out.println(jsonObject.get("productName"));
+            System.out.println(jsonObject.get("_id"));
+            idList.add(String.valueOf(jsonObject.get("_id")));
+            idMap.put(String.valueOf(jsonObject.get("_id")), Double.parseDouble(String.valueOf(jsonObject.get("price"))));
         } else {
             System.out.println("Failed to retrieve JSON response.");
         }
@@ -106,13 +115,11 @@ public class SalesController implements Initializable {
         productID = productID.replace("\"", "");
         String productName = String.valueOf(jsonObject.get("productName"));
         productName = productName.replace("\"", "");
-        System.out.println(productName + " " + productID);
-
         String category = "Food";
         String description = "Can eat";
         double unitPrice = Double.parseDouble(String.valueOf(jsonObject.get("price")));
         int quantity = Integer.parseInt(String.valueOf(jsonObject.get("quantityInStock")));
-//        double amount = Double.valueOf(String.valueOf(jsonObject.get("amount")));
+
         testList.add(new Test(productID, productName, category, description, unitPrice, quantity));
 
         colProductID.setCellValueFactory(new PropertyValueFactory<>("productID"));
@@ -126,7 +133,40 @@ public class SalesController implements Initializable {
         tblSales.setItems(testList);
         total = total + (unitPrice * quantity);
         lblTotalValue.setText(String.format("%.2f",total) + " LKR");
+    }
 
+    public void pay() {
+        String url = "https://smart-billing-system-50913e9a24e6.herokuapp.com/bill/";
+        String encodedTotal = URLEncoder.encode(String.valueOf(total), StandardCharsets.UTF_8);
+        String input = "{\"totalAmount\":\"" + encodedTotal + "\"}";
+        ApiService sender = new ApiService();
+        JSONObject response = sender.sendPostRequest(url, input);
+//        System.out.println(response);
+        System.out.println(response.get("_id"));
+        String billID = (String) response.get("_id");
+        String encodedBillID = URLEncoder.encode(billID, StandardCharsets.UTF_8);
+        System.out.println(idList);
+        System.out.println(idMap);
 
+        for (Map.Entry<String, Double> entry : idMap.entrySet()) {
+            String productID = entry.getKey();
+            String encodedProductID = URLEncoder.encode(productID, StandardCharsets.UTF_8);
+            Double unitPrice = entry.getValue();
+            String encodedUnitPrice = URLEncoder.encode(String.valueOf(unitPrice), StandardCharsets.UTF_8);
+            int quantity = 0;
+            for (String element : idList) {
+                if (element != null && element.equals(productID)) {
+                    quantity++;
+                }
+            }
+            String encodedQuantity = URLEncoder.encode(String.valueOf(quantity), StandardCharsets.UTF_8);
+            System.out.println("Key: " + productID + ", Value: " + unitPrice + ", Quantity: " + quantity);
+            String url2 = "https://smart-billing-system-50913e9a24e6.herokuapp.com/itempurchased/";
+            String input2 = "{\"billID\":\"" + encodedBillID + "\",\"productID\":\"" + encodedProductID + "\", \"quantity\":\"" + encodedQuantity + "\", \"unitPrice\":\"" + encodedUnitPrice + "\"}";
+            ApiService sender2 = new ApiService();
+            JSONObject response2 = sender2.sendPostRequest(url2, input2);
+            System.out.println("Invoice " + response2.get("_id"));
+            Model.getInstance().getViewFactory().getDashboardSelectedMenuItem().set("Sales");
+        }
     }
 }

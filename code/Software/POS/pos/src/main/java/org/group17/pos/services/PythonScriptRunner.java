@@ -10,6 +10,7 @@ public class PythonScriptRunner {
             // Get the path to the Python script from resources
             String scriptPath = PythonScriptRunner.class.getResource("/org/group17/pos/python/").getPath().substring(1)
                     + scriptName;
+            System.out.println(scriptPath);
 
             String[] command = { "python", scriptPath };
 

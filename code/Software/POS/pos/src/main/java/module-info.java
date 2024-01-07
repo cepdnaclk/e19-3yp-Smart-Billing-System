@@ -5,6 +5,7 @@ module org.group17.pos {
     requires java.sql;
     requires org.xerial.sqlitejdbc;
     requires com.google.gson;
+    requires org.json;
 
 
     opens org.group17.pos to javafx.fxml;
