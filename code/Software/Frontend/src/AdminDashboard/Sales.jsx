@@ -8,6 +8,7 @@ const Sales = () => {
   const [data, setData] = useState([]);
   const [labels, setLabels] = useState([]);
   const chartRef = useRef(null);
+  const fetchURL = "https://smart-billing-system-50913e9a24e6.herokuapp.com/";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,7 +21,7 @@ const Sales = () => {
         });
 
         const fetchDataPromises = lastTenDays.map(async (day) => {
-          const response = await axios.get(`http://localhost:5555/bill/billCountPerDay/${day}`);
+          const response = await axios.get(fetchURL + `bill/billCountPerDay/${day}`);
           return response.data.billCountSelectedDay;
           
         });

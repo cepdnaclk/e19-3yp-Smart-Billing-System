@@ -18,12 +18,13 @@ const Dashboard = () => {
   const [percentageChangeBills, setPercentageChangeBills] = useState(0);
 
   const [totalProductQuantities, setTotalProductQuantities] = useState(0);
+  const fetchURL = "https://smart-billing-system-50913e9a24e6.herokuapp.com/";
 
   useEffect(() => {
     // Fetch data when the component mounts
     const fetchSalesData = async () => {
       try {
-        const response = await axios.get('http://localhost:5555/itemPurchased/saletoday');
+        const response = await axios.get(fetchURL + 'itemPurchased/saletoday');
         const data = response.data;
         console.log(data);  
 
@@ -40,7 +41,7 @@ const Dashboard = () => {
      // Fetch bill data when the component mounts
      const fetchBillData = async () => {
       try {
-        const response = await axios.get('http://localhost:5555/bill/today');
+        const response = await axios.get(fetchURL + 'bill/today');
         const data = response.data;
         console.log(data);
 
@@ -57,7 +58,7 @@ const Dashboard = () => {
 
     const fetchProductQuantities = async () => {
       try {
-        const response = await axios.get("http://localhost:5555/itemPurchased/quantity/t");
+        const response = await axios.get(fetchURL + "itemPurchased/quantity/t");
         const data = response.data;
         console.log(data);
 

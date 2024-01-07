@@ -11,6 +11,8 @@ function Invoices() {
     paymentMethod: "",
     discountApplied: "",
   });
+
+  const fetchURL = "https://smart-billing-system-50913e9a24e6.herokuapp.com/";
   
   const handleUpdateInputChange = (e, id) => {
     const { name, value } = e.target;
@@ -26,7 +28,7 @@ function Invoices() {
   const handleCreate = async () => {
     console.log("Creating invoice:", newInvoice);
     try {
-      const response = await fetch("http://localhost:5555/bill/", {
+      const response = await fetch(fetchURL + "bill/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -59,7 +61,7 @@ function Invoices() {
     //console.log("Updating invoice:", id);
     console.log("Updated invoice data:", updateFormData);
     try {
-      const response = await fetch(`http://localhost:5555/bill/${id}`, {
+      const response = await fetch(fetchURL + `bill/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -90,7 +92,7 @@ function Invoices() {
   
   const handleDelete = async (id) => {
     try {
-      await fetch(`http://localhost:5555/bill/${id}`, {
+      await fetch(fetchURL + `bill/${id}`, {
         method: "DELETE",
       });
 
@@ -104,7 +106,7 @@ function Invoices() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5555/bill/");
+        const response = await fetch(fetchURL +  "bill/");
         const responseData = await response.json();
         console.log("Data from API:", responseData);
   
