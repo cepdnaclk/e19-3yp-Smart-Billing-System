@@ -1,0 +1,82 @@
+.main_menu_container {
+    -fx-background-color: #EEEEEE;
+    -fx-alignment: center;
+}
+
+.left_container {
+    -fx-background-color: #FFFFFF;
+    /*-fx-background-radius: 10;*/
+    /*-fx-effect: dropshadow(two-pass-box,#AAAAAA, 5, 0, 0, 4);*/
+}
+
+/* Title/Logo Section */
+.title_container {
+    -fx-background-color: #000000;
+    /*-fx-background-radius: 20 20 0 0;*/
+    -fx-alignment: top_center;
+    -fx-padding: 10;
+}
+
+.title_container ImageView {
+}
+
+.title_container Text {
+    -fx-fill: #FFFFFF;
+    -fx-font-size: 1.3em;
+    /*-fx-font-weight: bold;*/
+    -fx-font-family: "Bebas Neue Bold";
+}
+
+/* Navigation Section */
+.menu_container {
+    -fx-padding: 10, 10, 10, 20;
+    -fx-spacing: 20;
+    -fx-alignment: center;
+}
+
+.menu_container Button {
+    -fx-pref-width: 160;
+    -fx-pref-height: 50;
+    -fx-background-color: #000000;
+    -fx-font-family: "Bebas Neue Regular";
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 1.2em;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(three-pass-box, #DDDDDD, 6, 0, 0, 1);
+}
+
+.menu_container Button:hover {
+    -fx-background-color: #5a5a5a;
+    -fx-cursor: hand;
+}
+
+.menu_container Button FontAwesomeIconView {
+    -fx-fill: #ffffff;
+}
+
+/* Contact us and Copyright Details */
+.contact_container {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 10;
+    -fx-alignment: center;
+    -fx-spacing: 10;
+    -fx-padding: 10 0 10 0;
+}
+
+.contact_container Label {
+    -fx-text-fill: #c7c7c7;
+    -fx-text-alignment: center;
+    -fx-wrap-text: true;
+}
+
+.contact_container Button {
+    -fx-pref-width: 120;
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #7f7f7f;
+    -fx-effect: dropshadow(three-pass-box, #DDDDDD, 3, 0, 0, 1);
+}
+
+.contact_container Button:hover {
+    -fx-background-color: #efefef;
+    -fx-cursor: hand;
+}

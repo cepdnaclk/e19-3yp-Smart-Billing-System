@@ -8,9 +8,11 @@ public class PythonScriptRunner {
     public static String runPythonScript(String scriptName, String... args) {
         try {
             // Get the path to the Python script from resources
-            String scriptPath = PythonScriptRunner.class.getResource("/org/group17/pos/python/").getPath().substring(1) + scriptName;
+            String scriptPath = PythonScriptRunner.class.getResource("/org/group17/pos/python/").getPath().substring(1)
+                    + scriptName;
+            System.out.println(scriptPath);
 
-            String[] command = {"python", scriptPath};
+            String[] command = { "python", scriptPath };
 
             ProcessBuilder processBuilder = new ProcessBuilder(command);
             Process process = processBuilder.start();
