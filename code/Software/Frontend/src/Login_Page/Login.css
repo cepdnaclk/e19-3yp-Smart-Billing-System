@@ -115,16 +115,8 @@
     color: #ccc;
   }
 
-
-  .remember-me {
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Center the content horizontally */
-    margin-top: 16px; /* Add some top margin for spacing */
-  }
+.login_button{
+  width: 400px;
+}
   
-  .remember-me label {
-    margin-left: 8px; /* Add left margin to the label for spacing */
-    color: #555; /* Adjusted label color for better contrast */
-  }
   

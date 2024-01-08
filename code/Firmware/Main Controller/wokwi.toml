@@ -1,0 +1,5 @@
+[wokwi]
+version = 1
+elf = ".pio/build/nodemcu-32s/firmware.elf"
+firmware = ".pio/build/nodemcu-32s/firmware.bin"
+rfc2217ServerPort = 4000

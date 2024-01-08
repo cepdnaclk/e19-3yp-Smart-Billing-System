@@ -1,6 +1,79 @@
 import mongoose from "mongoose";
 import { ItemPurchased } from "../models/itemPurchasedModel.js";
+import moment from "moment";
 
+export async function getProductsSoldToday(request, response) {
+    try {
+        // Get the current date
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); // Set hours, minutes, seconds, and milliseconds to 0
+
+        // Get items purchased today
+        const itemsPurchasedToday = await ItemPurchased.find({
+            createdAt: { $gte: today },
+        });
+
+        // Calculate total sale for today
+        const totalSaleToday = itemsPurchasedToday.reduce(
+            (acc, item) => acc + item.quantity * item.unitPrice,
+            0
+        );
+
+        // Get items purchased yesterday
+        const yesterday = new Date(today);
+        yesterday.setDate(today.getDate() - 1);
+
+        const itemsPurchasedYesterday = await ItemPurchased.find({
+            createdAt: { $gte: yesterday, $lt: today },
+        });
+
+        // Calculate total sale for yesterday
+        const totalSaleYesterday = itemsPurchasedYesterday.reduce(
+            (acc, item) => acc + item.quantity * item.unitPrice,
+            0
+        );
+
+        // Calculate the percentage change
+        const percentageChange = calculatePercentageChange(totalSaleYesterday, totalSaleToday);
+
+        response.status(200).json({ totalSaleToday, totalSaleYesterday, percentageChange });
+    } catch (error) {
+        console.error(error.message);
+        response.status(500).json({ error: "An error occurred while fetching total sale." });
+    }
+}
+
+function calculatePercentageChange(previousValue, currentValue) {
+    if (previousValue === 0) {
+        return currentValue > 0 ? 100 : 0;
+    }
+
+    return ((currentValue - previousValue) / Math.abs(previousValue)) * 100;
+}
+/*
+export async function getAllSalesToday(request, response) {
+    try {
+        // Get the current date
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); // Set hours, minutes, seconds, and milliseconds to 0
+
+        // Get items purchased today
+        const itemsPurchasedToday = await ItemPurchased.find({
+            createdAt: { $gte: today },
+        });
+
+        // Calculate total sale
+        const totalSale = itemsPurchasedToday.reduce(
+            (acc, item) => acc + item.quantity * item.unitPrice,
+            0
+        );
+
+        res.status(200).json({ totalSale });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ error: "An error occurred while fetching total sale." });
+    }
+}*/
 export async function getAllItemsPurchased(request, response) {
     try {
         const itemPurchased = await ItemPurchased.find();
@@ -139,3 +212,28 @@ export async function deleteItemsPurchasedById(request, response) {
             .json({ error: "An error occurred while fetching purchased items." });
     }
 }
+
+export const getTotalProductQuantities = async () => {
+    try {
+  
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        // Get items purchased today
+        const itemsPurchased = await ItemPurchased.find({
+            createdAt: { $gte: today },
+        });
+
+        // Calculate the total quantity by summing the quantity field
+        const totalQuantity = itemsPurchased.reduce(
+            (total, item) => total + item.quantity,
+            0
+        );
+
+        return totalQuantity;
+    } catch (error) {
+     
+        console.error("Error fetching total product sold:", error);
+        throw error;
+    }
+};

@@ -131,3 +131,69 @@ export async function deleteBillById(request, response) {
             .json({ error: "An error occurred while fetching bills." });
     }
 }
+
+
+export async function getBillsToday(request, response) {
+    try {
+        // Get the current date
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); // Set hours, minutes, seconds, and milliseconds to 0
+    
+        // Get bills created today
+        const billsToday = await Bill.find({
+          createdAt: { $gte: today },
+        });
+    
+        // Get bills created yesterday
+        const yesterday = new Date(today);
+        yesterday.setDate(today.getDate() - 1);
+    
+        const billsYesterday = await Bill.find({
+          createdAt: { $gte: yesterday, $lt: today },
+        });
+    
+        // Calculate the bill count for today and yesterday
+        const billCountToday = billsToday.length;
+        const billCountYesterday = billsYesterday.length;
+    
+        // Calculate the percentage change
+        const percentageChange = calculatePercentageChange(billCountYesterday, billCountToday);
+    
+        response.status(200).json({ billCountToday, billCountYesterday, percentageChange });
+      } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ error: 'An error occurred while fetching bill count.' });
+      }
+    };
+    
+    function calculatePercentageChange(previousValue, currentValue) {
+      if (previousValue === 0) {
+        return currentValue > 0 ? 100 : 0;
+      }
+    
+      return ((currentValue - previousValue) / Math.abs(previousValue)) * 100;
+    }
+    export async function getBillCountPerdate(request, response) {
+        try {
+          const { day } = request.params;
+          
+          // Parse the day parameter to a Date object
+          const selectedDay = new Date(day);
+          selectedDay.setHours(0, 0, 0, 0); // Set hours, minutes, seconds, and milliseconds to 0
+      
+          // Get bills created on the selected day
+          const billsOnSelectedDay = await Bill.find({
+            createdAt: { $gte: selectedDay, $lt: new Date(selectedDay.getTime() + 24 * 60 * 60 * 1000) },
+          });
+      
+          // Calculate the bill count for the selected day
+          const billCountSelectedDay = billsOnSelectedDay.length;
+      
+          response.status(200).json({ billCountSelectedDay });
+        } catch (error) {
+          console.error(error.message);
+          response.status(500).json({ error: 'An error occurred while fetching the bill count for the selected day.' });
+        }
+      }
+      
+      

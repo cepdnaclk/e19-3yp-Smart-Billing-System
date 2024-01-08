@@ -1,0 +1,33 @@
+.square-card {
+    height: 90%;
+    border-radius: 15px;
+    aspect-ratio: 1/1;
+    border-color: rgb(5, 6, 6);
+    margin: 0;
+    margin-top: 15px;
+}
+
+.row {
+    gap: 100px;
+}
+
+.card-body_device_status {
+    padding: 25px;
+}
+
+.container_for_sales {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 900px;
+    border-radius: 25px;
+    padding: 40px;
+}
+
+.text-green {
+    color: green;
+}
+
+.text-red {
+    color: red;
+}

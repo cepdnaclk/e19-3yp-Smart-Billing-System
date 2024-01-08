@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
@@ -10,12 +10,13 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
 
     console.log('Login submitted:', { username, password, rememberMe });
-    //history.push('/AdminDashboard');
+    navigate('/AdminDashboard');
     
     setUsername('');
     setPassword('');
@@ -51,20 +52,24 @@ const Login = () => {
     id="password"
     value={password}
     onChange={(e) => setPassword(e.target.value)}
-    placeholder="strong password"
+    placeholder="Password"
     required
   />
 </div>
         <div>
-          <button type="submit">Login</button>
+          <button className="login_button" type="submit">Login</button>
         </div>
+        
+        
+          <label className="form-check-label">
+            <input type="checkbox" 
+            className="form-check-input" 
+            id="rememberMe" 
+            checked={rememberMe} 
+            onChange={(e)=> setRememberMe(e.target.checked)}/>
 
-        <div className="remember-me">
-        <label><input type="checkbox" id="reme" name="reme" />
-            Remember Me
-        </label>
-          </div>
-
+              <small> Remember Me</small>
+          </label>
       </form>
       <p>
         Don't have an account? <Link to="/register">Sign Up</Link>

@@ -1,0 +1,30 @@
+
+.container_for_topselling {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 900px;
+  border-radius: 25px;
+  margin-bottom: 30px;
+  padding: 40px;
+ 
+}
+.square-card_topselling {
+  height: 37vh; /* Adjust as needed */
+  border-radius: 5px; 
+  aspect-ratio: 1/1;
+  border-color: rgb(45, 49, 49);
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.card-img-top {
+  width: 70%;
+  height: 200px; /* Adjust the height according to your preference */
+  object-fit: cover;
+  align-content: center;
+}
+.col{
+  gap: 10000px;
+}

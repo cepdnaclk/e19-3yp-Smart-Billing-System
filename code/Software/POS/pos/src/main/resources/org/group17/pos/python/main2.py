@@ -11,6 +11,7 @@ from skimage.metrics import structural_similarity
 current_script_directory = os.path.dirname(os.path.abspath(__file__))
 # image_path = os.path.join(current_script_directory, 'test.jpg')
 image_path = "C:/Users/pasin/OneDrive/Documents/GitHub/e19-3yp-Smart-Billing-System/code/Software/POS/pos/src/main/resources/org/group17/pos/python/"
+
 def scan_qr_code_from_url(image_url):
     try:
         # Send a GET request to the provided URL to get the image

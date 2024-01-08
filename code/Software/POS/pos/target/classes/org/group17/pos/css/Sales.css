@@ -1,0 +1,118 @@
+.main_menu_container {
+    -fx-background-color: #EEEEEE;
+    -fx-alignment: center;
+}
+
+.title {
+    -fx-font-size: 2.6em;
+    -fx-font-family: "Bebas Neue Bold";
+    -fx-text-fill: #000000;
+}
+
+.date {
+    -fx-font-size: 1.5em;
+    -fx-font-family: "Bebas Neue Regular";
+    -fx-text-fill: #000000;
+}
+
+.table_container {
+    /*-fx-background-color: #FFFFFF;*/
+    -fx-background-radius: 10 0 0 10;
+    -fx-padding: 10 0 10 0;
+    -fx-alignment: center;
+    -fx-spacing: 10;
+}
+
+.table_container HBox {
+    -fx-alignment: center-right;
+    -fx-padding: 0 30 0 0;
+}
+
+#lblTotal {
+    -fx-font-size: 1.5em;
+    -fx-font-family: "Bebas Neue Bold";
+    -fx-text-fill: #000000;
+}
+
+.table_container HBox Label {
+    -fx-font-size: 1.5em;
+    -fx-font-family: "Bebas Neue Regular";
+    -fx-text-fill: #000000;
+}
+
+#btnPay {
+    -fx-max-width: 1500;
+    -fx-pref-height: 20;
+    -fx-background-color: #1fce3c;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 1.7em;
+    -fx-alignment: center;
+    -fx-font-family: "Bebas Neue Bold";
+    -fx-effect: dropshadow(three-pass-box, #DDDDDD, 6, 0, 0, 1);
+}
+
+#btnPay:hover {
+    -fx-background-color: #1b922e;
+    -fx-cursor: hand;
+}
+
+#btnAddItem {
+    -fx-max-width: 180;
+    -fx-pref-height: 20;
+    -fx-background-color: #1fa5ce;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 1.7em;
+    -fx-alignment: center;
+    -fx-font-family: "Bebas Neue Bold";
+    -fx-effect: dropshadow(three-pass-box, #DDDDDD, 6, 0, 0, 1);
+}
+
+#btnAddItem:hover {
+    -fx-background-color: #1985ac;
+    -fx-cursor: hand;
+}
+
+.table_container FontAwesomeIconView {
+    -fx-fill: #FFFFFF;
+}
+
+.table-view .column-header,
+.table-view .column-header-background .filler {
+    -fx-background-color:  #000000;
+}
+.table-view .column-header .label{
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-alignment: center-left;
+}
+.table-view .cell{
+    -fx-cell-size: 35;
+    -fx-alignment: center-left;
+    -fx-border-color: #000000;
+    -fx-border-width: 0.1;
+    -fx-text-fill: #000000;
+
+}
+.table-row-cell:selected {
+    -fx-background-color: whitesmoke;
+    -fx-text-background-color: #a0a0a0;
+}
+
+.table-view .cell:odd {
+    -fx-background-color: #f1f1f1;
+    -fx-background-insets: 0, 0 0 1 0;
+}
+
+.table-view .cell:even {
+    -fx-background-color: #ffffff;
+    -fx-background-insets: 0, 0 0 1 0;
+}
+
+/*.table-view .cell:empty {*/
+/*    -fx-background-color: white;*/
+/*    -fx-border-color: white;*/
+/*}*/
+
+/*.table-view {*/
+/*    -fx-border-color: white;*/
+/*}*/

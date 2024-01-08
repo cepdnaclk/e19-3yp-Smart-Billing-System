@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Self Checkout</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500&family=Jost:wght@500;600;700&display=swap" rel="stylesheet"> 
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="51">
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0" id="home">
+            <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+                <a href="" class="navbar-brand p-0">
+                    <h1 class="m-0">Smart Billing System</h1>
+                    <!-- <img src="img/logo.png" alt="Logo"> -->
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav mx-auto py-0">
+                        <a href="#home" class="nav-item nav-link active">Home</a>
+                        <a href="#about" class="nav-item nav-link">About</a>
+                        <a href="#feature" class="nav-item nav-link">Solution Architecture</a>
+                        <a href="#hardware" class="nav-item nav-link">Hardware Components</a>
+                        <a href="#3D-model" class="nav-item nav-link">3D model</a>
+                        <a href="#testing" class="nav-item nav-link">Testing</a>
+                        <a href="#budget" class="nav-item nav-link">Budget</a>
+                        <a href="#contact" class="nav-item nav-link">Contact</a>
+                    </div>
+                    
+                </div>
+            </nav>
+
+            <div class="container-xxl bg-primary hero-header">
+                <div class="container px-lg-5">
+                    <div class="row g-5">
+                        <div class="col-lg-8 text-center text-lg-start">
+                            <h1 class="text-white mb-4 animated slideInDown"> Next Gen Billing Experience with SELF CHECKOUT</h1>
+                            <p class="text-white pb-3 animated slideInDown"> In the fast-paced world of retail, where accuracy, efficiency, and customer satisfaction are paramount, our innovative solution is set to revolutionize the way supermarkets operate
+                            </p>
+                            <a href="https://github.com/cepdnaclk/e19-3yp-Smart-Billing-System"
+                                class="btn btn-primary-gradient py-sm-3 px-4 px-sm-5 rounded-pill me-3 animated slideInLeft">Project
+                                Repo</a>
+                            
+                        </div>
+                        <div class="col-lg-4 d-flex justify-content-center justify-content-lg-end wow fadeInUp"
+                            data-wow-delay="0.3s">
+                            <div class="owl-carousel screenshot-carousel">
+                                <img class="img-fluid" src="https://www.zdnet.com/a/img/resize/eac0ccd007f3871fe97fcb88bceec0d3d57d9d44/2023/01/27/3a4a2d04-3cc7-4902-a192-10a30b8b9137/gettyimages-1273419175.jpg?auto=webp&width=1280" alt="">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+
+       <!-- About Start -->
+       <div class="container-xxl py-5" id="about">
+        <div class="container py-5 px-lg-5">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <h5 class="text-primary-gradient fw-medium">About System</h5>
+                    <h1 class="mb-4">#1 Why you need this?</h1>
+                    <p class="mb-4">Retail businesses, especially supermarkets, face challenges related to billing accuracy, customer satisfaction, and operational efficiency. In a bustling supermarket environment, ensuring smooth transactions, preventing billing errors, and optimizing customer service are crucial for business success.
+
+                        <ul>Common Issues in Supermarkets:
+                            <br><br>
+                            <li>Billing Errors: Mistakes in billing can lead to customer dissatisfaction and financial losses for the supermarket.</li>
+                            <li> Inventory Management: Keeping track of products, managing stock levels, and preventing losses due to theft or damage are ongoing challenges.</li>
+                            <li>Customer Experience: Long queues, slow checkout processes, and inadequate customer support can impact the shopping experience.</li>
+                        </ul></p>
+
+                    <!-- <a href="" class="btn btn-primary-gradient py-sm-3 px-4 px-sm-5 rounded-pill mt-3">Read More</a> -->
+                </div>
+                <div class="col-lg-6">
+                    <img class="img-fluid wow fadeInUp" data-wow-delay="0.5s" src="https://www.wavetec.com/wp-content/uploads/2023/05/How-AI-Works-in-Self-Checkout-Systems.png">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+
+    <div class="container-xxl py-5">
+        <div class="container py-5 px-lg-5">
+            <div class="row g-5 align-items-center">
+                <div>
+                    <video controls width="100%">
+                        <source src="vid/Smart Billing System.mp4" type="video/mp4">
+                    </video>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+        <!-- Features Start -->
+        <div class="container-xxl py-5" id="feature">
+            <div class="container py-5 px-lg-5">
+                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                    <h5 class="text-primary-gradient fw-medium">App Features</h5>
+                    <h1 class="mb-5">Solution Architecture</h1>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="feature-item bg-light rounded p-4">
+                            <div class="d-inline-flex align-items-center justify-content-center bg-primary-gradient rounded-circle mb-4" style="width: 60px; height: 60px;">
+                                <i class="fa fa-eye text-white fs-4"></i>
+                            </div>
+                            <h5 class="mb-3">Our Solution</h5>
+                            <br>
+                            <p class="m-0">Introducing the Smart Billing System, a cutting-edge solution for supermarkets designed to elevate efficiency and customer satisfaction.</p>
+                            <p class="m-0"> Features include automated barcode scanning for swift and accurate product identification, real-time inventory management with low-stock alerts, a customer feedback mechanism on digital receipts, AI-powered predictive analytics for optimizing stock levels, a weight checker for automated item weight recognition, and an AI item recognizer streamlining the billing process.</p>
+                            <br>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="feature-item bg-light rounded p-4">
+                            <div class="d-inline-flex align-items-center justify-content-center bg-secondary-gradient rounded-circle mb-4" style="width: 60px; height: 60px;">
+                                <i class="fa fa-layer-group text-white fs-4"></i>
+                            </div>
+                            <h5 class="mb-3">Features of the System</h5>
+                            <br>
+                            <br>
+                            <p class="m-0">scanning the bar code.</p>
+                            <br>
+                            <br>
+                            <p class="m-0">identification of the product using Image processing</p>
+                            <br>
+                            <br>
+                            <p class="m-0">identification of missed products</p>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="feature-item bg-light rounded p-4">
+                            <div class="d-inline-flex align-items-center justify-content-center bg-primary-gradient rounded-circle mb-4" style="width: 60px; height: 60px;">
+                                <i class="fa fa-edit text-white fs-4"></i>
+                            </div>
+                            <h5 class="mb-3">Main Components</h5>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <p class="m-0">Our system consist of three main components. They are Self-checkout system with Two camera modules,POS system and web app for administration purposes.</p>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                        </div>
+                    </div>
+        <!-- Features End -->
+        <!-- software architecture -->
+        <div class="container-xxl py-5">
+            <h1 class="text-primary-gradient fw-medium">High Level Software Architecture</h1>
+            <div class="container py-5 px-lg-5">
+                <div class="row g-5 align-items-center">
+                    <div>
+                        <img class="img-fluid wow fadeInUp" data-wow-delay="0.1s" src="./img/Screenshot 2024-01-07 105900.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Physical Layer -->
+        <div class="container-xxl py-5" id="physical_layer">
+            <h1 class="text-primary-gradient fw-medium">High Level Hardware Architecture</h1>
+            <div class="container py-5 px-lg-5">
+                <div class="row g-5 align-items-center">
+                    <div>
+                        <img class="img-fluid wow fadeInUp" data-wow-delay="0.1s" src="img/hardware.png">
+                    </div>
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s" id="hardware">
+                        <h5 class="text-primary-gradient fw-medium">Sensors and other hardware components</h5>
+                        <h2 class="mb-4">Hardware Components</h2>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-wrap">
+                    <table class="table table-responsive-xl">
+                      <thead>
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th>Component</th>
+                          <th>Details</th>
+                          <th class="last-column">Supply voltage</th>
+                          <th>&nbsp;</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr class="alert" role="alert">
+                            <td>
+                                
+                            </td>
+                            
+                          <td class="d-flex align-items-center">
+                              <div class="img" style="background-image: url(https://tronic.lk/assets/uploads/44484f83077ef17ddd91be4cc56f8f2f.jpg); ;"></div>
+                              <div class="pl-3 email">
+                                  <span>ESP 32</span>
+                                  <span>Cam Module</span>
+                              </div>
+                          </td>
+                          <td>The ESP32-CAM is a small size, low power consumption camera module based on ESP32. It comes with an OV2640 camera and an ESP32-CAM-MB micro usb to serial port adapter. </td>
+                          <td class="status"><span class="active">3.3 - 5.0V</span></td>
+                          <td>
+                              
+                        </td>
+                        </tr>
+                        <tr class="alert" role="alert">
+                            <td>
+                                
+                            </td>
+                          <td class="d-flex align-items-center">
+                            <div class="img" style="background-image: url(https://www.botnroll.com/13928-medium_default/0-95inch-128x64-oled-i2c-display-blue-yellow-ssd1306-driver.jpg);"></div>
+                              <div class="pl-3 email">
+                                  <span>OLED display</span>
+                                  <span>Display for Greater User Experience </span>
+                              </div>
+                          </td>
+                          <td>two LEDs, a photodetector, optimized optics, and low-noise analog signal processing to detect pulse oximetry (SpO2) and heart rate (HR) signals.Power consumption is really low and that makes this sensor suitable for wearable devices. (Ultra-Low Shutdown Current(standby mode) - 0.7μA), Programmable Sample Rate
+</td>
+                          <td class="status"><span class="active">3.3 - 5.0V</span></td>
+                          <td>
+                              
+                        </td>
+                        </tr>
+                        <tr class="alert" role="alert">
+                            <td>
+                                
+                            </td>
+                          <td class="d-flex align-items-center">
+                              <div class="img" style="background-image: url(https://core-electronics.com.au/media/catalog/product/1/k/1kg-load-cell.jpg);"></div>
+                              <div class="pl-3 email">
+                                  <span>1KG</span>
+                                  <span>Load-cell</span>
+                              </div>
+                          </td>
+                          <td>This straight bar load cell (sometimes called a strain gauge) can translate up to 1kg of pressure (force) into an electrical signal. Each load cell is able to measure the electrical resistance that changes in response to, and proportional of, the strain (e.g. pressure or force) applied to the bar.</td>
+                          <td class="status"><span class="waiting">3.0 - 10V</span></td>
+                          <td>
+                          
+                        </td>
+                        </tr>
+                       
+                        <tr class="alert" role="alert">
+                            <td >
+                                
+                            </td>
+                          <td class="d-flex align-items-center">
+                              <div class="img" style="background-image: url(https://electronics.semaf.at/media/image/product/1386/lg/load-cell-amplifier-hx711.jpg);"></div>
+                              <div class="pl-3 email">
+                                  <span>HX711</span>
+                                  <span>Amplifier</span>
+                              </div>
+                          </td>
+                          <td>The HX711 amplifier is a breakout board that allows you to easily read load cells to measure weight. You wire the load cell wires on one side, and the microcontroller on the other side. The HX711 communicates with the microcontroller using two-wire interface (Clock and Data).</td>
+                          <td class="status"><span class="active">2.7- 5.5 V</span></td>
+                          <td >
+                          
+                        </td>
+                        </tr>
+
+                        <tr class="alert" role="alert">
+                            <td>
+                                
+                            </td>
+                          <td class="d-flex align-items-center">
+                              <div class="img" style="background-image: url(https://static-01.daraz.lk/p/c35cade1d159ac5077b0bfc97e771804.jpg);"></div>
+                              <div class="pl-3 email">
+                                  <span>ESP32</span>
+                                  <span>Main module</span>
+                              </div>
+                          </td>
+                          <td>This ESP32 module features two CPU cores that can be individually controlled. Moreover, the CPU clock frequency is adjustable from 80 MHz to 240 MHz. The user may also power off the CPU and use the low-power co-processor to continuously monitor for changes or crossing thresholds.</td>
+                          <td class="status"><span class="waiting">2.2 - 3.6V</span></td>
+                          <td>
+                          
+                        </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    
+     <!-- 3d model -->
+        <div class="container-xxl py-5" id="model">
+            <div class="container py-5 px-lg-5">
+                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                    <h5 class="text-primary-gradient fw-medium">model</h5>
+                    <h1 class="mb-5">Basic 3D model of the product</h1>
+                </div>
+                <div class="row g-5 align-items-center">
+   
+                    <div>
+                        <img class="img-fluid wow fadeInUp" data-wow-delay="0.1s" src="img/3d_model.png">
+                    </div>
+   
+                </div>
+            </div>
+        </div>
+
+    <!-- Testing -->
+    <div class="container-xxl py-5" id="testing">
+        <div class="container py-5 px-lg-5">
+            <div class="row g-5 align-items-center">
+                    
+                <div data-wow-delay="0.3s">
+                    <h5 class="text-primary-gradient fw-medium">Hardware and Software testing</h5>
+                    <h1 class="mb-5">Testing</h1>
+                    
+                    <p>Since in this project we are working with medical parameters, it is really essential to make sure the hardware components are working properly
+                        and giving the readings correct. Also we have to test the physical arrangements of the sensors inorder to get the reading with higher accuracy.
+                        Software side is going to be tested from the beginning to ensure that analysized data is displaying in the proper manner.
+                    </p>
+                    <div>
+                        <img class="img-fluid wow fadeInUp" data-wow-delay="0.1s" src="img/testing1.png">
+                        <img class="img-fluid wow fadeInUp" data-wow-delay="0.1s" src="img/testing2.png">
+                        
+                    </div>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+        <!-- Budget Start -->
+        <div class="container-xxl py-5" id="budget">
+            <div class="container py-5 px-lg-5">
+                <div class="row g-5 align-items-center">
+
+                    <div data-wow-delay="0.3s">
+                        <h5 class="text-primary-gradient fw-medium">Budget</h5>
+                        <h1 class="mb-4">Bill of Materials</h1>
+                        
+                        <div>
+                            <img class="img-fluid wow fadeInUp" data-wow-delay="0.1s" src="img/budget.png">
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- Testimonial Start -->
+        <div class="container-xxl py-5" id="review">
+            <div class="container py-5 px-lg-5">
+                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                    <h5 class="text-primary-gradient fw-medium">Team</h5>
+                    <h1 class="mb-5">About Us</h1>
+                </div>
+                <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="testimonial-item rounded p-4">
+                        <div class="d-flex align-items-center mb-4">
+                            <img class="img-fluid bg-white rounded flex-shrink-0 p-1" src="img/mewan.jpg" style="width: 85px; height: 85px;">
+                            <div class="ms-4">
+                                <h5 class="mb-1">Mewan Dimalsha</h5>
+                                <p class="mb-1">Computer Engineering Undergraduate</p>
+                                <p class="mb-1">University of Peradeniya</p>
+                            </div>
+                        </div>
+                        <p class="mb-0">E-19-111</p>
+                    </div>
+                    <div class="testimonial-item rounded p-4">
+                        <div class="d-flex align-items-center mb-4">
+                            <img class="img-fluid bg-white rounded flex-shrink-0 p-1" src="img/pasindu.jpeg" style="width: 85px; height: 85px;">
+                            <div class="ms-4">
+                                <h5 class="mb-1">Pasindu Rangana</h5>
+                                <p class="mb-1">Computer Engineering Undergraduate</p>
+                                <p class="mb-1">University of Peradeniya</p>
+                            </div>
+                        </div>
+                        <p class="mb-0">E-19-310</p>
+                    </div>
+                    <div class="testimonial-item rounded p-4">
+                        <div class="d-flex align-items-center mb-4">
+                            <img class="img-fluid bg-white rounded flex-shrink-0 p-1" src="img" style="width: 85px; height: 85px;">
+                            <div class="ms-4">
+                                <h5 class="mb-1">Akash Withanarachci</h5>
+                                <p class="mb-1">Computer Engineering Undergraduate</p>
+                                <p class="mb-1">University of Peradeniya</p>
+                            </div>
+                        </div>
+                        <p class="mb-0">E-19-453</p>
+                    </div>
+                    <div class="testimonial-item rounded p-4">
+                        <div class="d-flex align-items-center mb-4">
+                            <img class="img-fluid bg-white rounded flex-shrink-0 p-1" src="img/pubudu.png" style="width: 85px; height: 85px;">
+                            <div class="ms-4">
+                                <h5 class="mb-1">Pubudu Weerasinghe</h5>
+                                <p class="mb-1">Computer Engineering Undergraduate</p>
+                                <p class="mb-1">University of Peradeniya</p>
+                            </div>
+                        </div>
+                        <p class="mb-0">E-19-426</p>
+                    </div>
+                    <div class="testimonial-item rounded p-4">
+                        <div class="d-flex align-items-center mb-4">
+                            <img class="img-fluid bg-white rounded flex-shrink-0 p-1" src="img" style="width: 85px; height: 85px;">
+                            <div class="ms-4">
+                                <h5 class="mb-1">Kanchana Kaushalya</h5>
+                                <p class="mb-1">Computer Engineering Undergraduate</p>
+                                <p class="mb-1">University of Peradeniya</p>
+                            </div>
+                        </div>
+                        <p class="mb-0">E-19-193</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Testimonial End -->
+
+        <!-- Supervisors -->
+        <div class="container-xxl py-5" id="review">
+            <div class="container py-5 px-lg-5">
+                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                    
+                    <h1 class="mb-5">Supervisors</h1>
+                </div>
+                <div>
+                    <div class="testimonial-item rounded p-4">
+                        <div class="d-flex align-items-center mb-4">
+                            <img class="img-fluid bg-white rounded flex-shrink-0 p-1" src="img/drIsuru.jpeg" style="width: 85px; height: 85px;">
+                            <div class="ms-4">
+                                <h5 class="mb-1">Dr. Isuru Nawinne</h5>
+                                <p class="mb-1">Senior Lecturer</p>
+                                <p class="mb-1">Department of Computer Engineering</p>
+                                <p class="mb-1">University of Peradeniya</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Supervisors End -->
+
+        <!-- Contact Start -->
+        <div class="container-xxl py-5" id="contact">
+            <div class="container py-5 px-lg-5">
+                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                    <h5 class="text-primary-gradient fw-medium">Contact Us</h5>
+                    <h1 class="mb-5">Get In Touch!</h1>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-9">
+                        <div class="wow fadeInUp" data-wow-delay="0.3s"><form>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="name" placeholder="Your Name">
+                                            <label for="name">Your Name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="email" class="form-control" id="email" placeholder="Your Email">
+                                            <label for="email">Your Email</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="subject" placeholder="Subject">
+                                            <label for="subject">Subject</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <textarea class="form-control" placeholder="Leave a message here" id="message" style="height: 150px"></textarea>
+                                            <label for="message">Message</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 text-center">
+                                        <button class="btn btn-primary-gradient rounded-pill py-3 px-5" type="submit">Send Message</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Contact End -->
+        
+        <!-- Footer Start -->
+    <div class="container-fluid bg-primary text-light footer wow fadeIn" data-wow-delay="0.1s">
+        <div class="container py-5 px-lg-5">
+            <div class="row g-5">
+                <div class="col-md-6 col-lg-3">
+                    <h4 class="text-white mb-4">3rd Year Project</h4>
+                    <p>Group 17 - E19 batch<br>
+                        Department of Computer Engineering<br>
+                        University of Peradeniya</p>
+                  
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <h4 class="text-white mb-4">Quick Link</h4>
+                    <a class="btn btn-link"
+                        href="https://github.com/cepdnaclk/e19-3yp-Smart-Billing-System">Project
+                        Repository</a>
+                    <a class="btn btn-link" href="http://www.ce.pdn.ac.lk/">Department of Computer Engineering</a>
+                    <a class="btn btn-link" href="https://eng.pdn.ac.lk/">University of Peradeniya</a>
+                </div>
+                
+            </div>
+        </div>
+        <div class="container px-lg-5">
+            <div class="copyright">
+                <div class="row">
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-lg-square back-to-top pt-2"><i class="bi bi-arrow-up text-white"></i></a>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>
