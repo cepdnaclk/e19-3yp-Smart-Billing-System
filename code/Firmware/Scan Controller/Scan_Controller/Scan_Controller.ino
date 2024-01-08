@@ -28,8 +28,8 @@
 
 
 // Define the credentials of your local network
-const char* ssid = "LAPTOP-2OVHNK5H";
-const char* password = "12345678";
+const char* ssid = "Dialog 4G";
+const char* password = "3HB2DL4BNT8";
 const char* mqttServer = "broker.emqx.io";
 const int   mqttPort = 1883;
 const char* mqttUser = "emqx-test";
