@@ -14,9 +14,9 @@ const Sales = () => {
     const fetchData = async () => {
       try {
         const today = new Date();
-        const lastTenDays = Array.from({ length: 10 }, (_, i) => {
+        const lastTenDays = Array.from({ length: 30 }, (_, i) => {
           const day = new Date(today);
-          day.setDate(today.getDate() - i+1);
+          day.setDate(today.getDate() - i);
           return day.toISOString().split('T')[0];
         });
 

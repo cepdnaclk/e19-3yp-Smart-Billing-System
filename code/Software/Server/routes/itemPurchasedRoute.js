@@ -8,20 +8,23 @@ import {
     updateItemsPurchased,
     deleteItemsPurchasedById,
     getProductsSoldToday,
-    getTotalProductQuantities
+    getTotalProductQuantities,
+    deleteItemsPurchasedByBillId,
+    getTopSellingProducts
 } from "../controllers/itemPurchasedController.js";
 
 const router = express.Router();
 router.use(cors());
 
-// Route for get top selling products
-//router.get("/topselling", getTopSellingProducts);
 
 // Route for get total sale today
 router.get("/saletoday", getProductsSoldToday);
 
 // Route for get total product quantities in today
 router.get("/quantity/t", getTotalProductQuantities);
+
+//Route for get top 3 selling products
+router.get("/topselling", getTopSellingProducts);
 
 // Route for get all purchased item
 router.get("/", getAllItemsPurchased);
@@ -38,6 +41,8 @@ router.put("/:id", updateItemsPurchased);
 // Route for delete purchased item by id
 router.delete("/:id", deleteItemsPurchasedById);
 
+//Route for delete purchased item by bill id
+router.delete("/bill/:id", deleteItemsPurchasedByBillId);
 
 
 export default router;

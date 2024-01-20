@@ -58,7 +58,7 @@ const Dashboard = () => {
 
     const fetchProductQuantities = async () => {
       try {
-        const response = await axios.get(fetchURL + "itemPurchased/quantity/t");
+        const response = await axios.get("http://localhost:5555/itemPurchased/quantity/t");
         const data = response.data;
         console.log(data);
 

@@ -92,7 +92,12 @@ function Invoices() {
   
   const handleDelete = async (id) => {
     try {
+      //await fetch("http://localhost:5555/bill/" + id, {
       await fetch(fetchURL + `bill/${id}`, {
+        method: "DELETE",
+      });
+      //await fetch("http://localhost:5555/itemPurchased/bill/" + id, {
+      await fetch(fetchURL + `itemPurchased/bill/${id}`, {
         method: "DELETE",
       });
 
@@ -147,7 +152,7 @@ function Invoices() {
     <td>{invoice._id}</td>
     <td>{invoice.createdAt}</td>
     <td>{invoice.totalAmount}
-    <form >
+   {/**  <form >
         
         <input
           type="text"
@@ -156,11 +161,11 @@ function Invoices() {
           onChange={(e) => handleUpdateInputChange(e, invoice._id)}
           style={{ width: '70px',height:'27px',borderRadius:'1px'}}
         />
-    </form>
+    </form>*/}
     </td>
 
     <td>{invoice.discountApplied}
-    <form className="custom-form">
+    {/*<form className="custom-form">
     
         <input
           type="text"
@@ -168,10 +173,10 @@ function Invoices() {
           value={updateFormData[invoice._id]?.discountApplied || ""}
           onChange={(e) => handleUpdateInputChange(e, invoice._id)}
           style={{ width: '90px',height:'27px',borderRadius:'1px'}}
-        /></form>
+  /></form>*/}
     </td>
     <td>{invoice.paymentMethod}
-    <form >
+   {/* <form >
             
                 <input
                 type="text"
@@ -180,14 +185,14 @@ function Invoices() {
                 onChange={(e) => handleUpdateInputChange(e, invoice._id)}
                 style={{ width: '100px' ,height:'27px',borderRadius:'1px'}}
                 />
-    </form>
+    </form> */}
     </td>
     <td>
       
 
-        <button type="button" onClick={() => handleUpdate(invoice._id)}>
+       {/*  <button type="button" onClick={() => handleUpdate(invoice._id)}>
           Update
-        </button>
+        </button>*/}
       
       <button onClick={() => handleDelete(invoice._id)}>Delete</button>
     </td>
