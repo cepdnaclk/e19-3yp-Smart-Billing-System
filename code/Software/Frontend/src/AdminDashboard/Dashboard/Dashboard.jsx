@@ -24,7 +24,7 @@ const Dashboard = () => {
     // Fetch data when the component mounts
     const fetchSalesData = async () => {
       try {
-        const response = await axios.get("https://4e9eq7iw62.execute-api.ap-southeast-1.amazonaws.com/v1/bill/");
+        const response = await axios.get("http://localhost:5555/itemPurchased/saletoday");
         const data = response.data;
         console.log(data);  
 
