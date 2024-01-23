@@ -7,6 +7,8 @@ import './TopSellingProduct.css'
 function TopSellingProducts() {
   const [topSellingProducts, setTopSellingProducts] = useState([]);
 
+  const fetchURL = "https://4e9eq7iw62.execute-api.ap-southeast-1.amazonaws.com/v1/";
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -19,13 +21,15 @@ function TopSellingProducts() {
             if (product.productID[0]=='%'){
               product.productID = product.productID.slice(3, -3);
             }
+            ///const productDetailsResponse = await fetch(fetchURL +`/product/${product.productID}`);
             const productDetailsResponse = await fetch(`http://localhost:5555/product/${product.productID}`);
+            //const productDetailsResponse = await fetch("http://localhost:5555/product/6591a6e000919e2a51ca9be9");
             const productDetailsData = await productDetailsResponse.json();
 
             return {
               ...product,
               name: productDetailsData.productName,
-              image: productDetailsData.image,
+              image: productDetailsData.imgURL,
             };
           })
         );

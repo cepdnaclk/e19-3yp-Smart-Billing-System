@@ -314,10 +314,53 @@ export async function getTopSellingProducts(request, response) {
             quantity: quantity,
         }));
 
-        response.status(200).json({ topSellingProducts });
+         response.status(200).json({ topSellingProducts });
+       
+    } catch (error) {
+        console.error(error.message);
+        response.status(500).json({ error: `An error occurred: ${error.message}` });
+    }
+}
+
+export async function gettopProducts(request, response) {
+    try {
+        // Get the current date
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); // Set hours, minutes, seconds, and milliseconds to 0
+
+        // Get items purchased today
+        const itemsPurchasedToday = await ItemPurchased.find({
+            createdAt: { $gte: 2024-1-8 },
+        });
+
+        // Calculate total quantity sold for each product
+        const productQuantities = itemsPurchasedToday.reduce((acc, item) => {
+            const productId = item.productID;
+
+            if (acc[productId]) {
+                acc[productId] += item.quantity;
+            } else {
+                acc[productId] = item.quantity;
+            }
+
+            return acc;
+        }, {});
+
+        // Sort products by quantity in descending order
+        const sortedProducts = Object.entries(productQuantities)
+            .sort(([, a], [, b]) => b - a)
+            .slice(0, 5) // Get the top 5 selling products
+
+        const topSellingProducts = sortedProducts.map(([productId, quantity]) => ({
+            productID: productId,
+            quantity: quantity,
+        }));
+
+         response.status(200).json({ topSellingProducts });
        
     } catch (error) {
         console.error(error.message);
         response.status(500).json({ error: `An error occurred: ${error.message}` });
     }
 };
+

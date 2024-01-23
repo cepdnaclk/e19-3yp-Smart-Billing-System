@@ -3,20 +3,37 @@ import React, { useEffect, useState } from 'react';
 
 const TopProducts = () => {
   const [products, setProducts] = useState([]);
+  
 
   useEffect(() => {
-    // Fetch top products data and set it to the state
-    // can make an API call or use any other method to get the data
     const fetchData = async () => {
-      // Example data
-      const topProductsData = [
-        { id: 1, name: 'Apple', image: 'https://healthjade.com/wp-content/uploads/2017/10/apple-fruit.jpg', popularity: '88%', sales: 345 },
-        { id: 2, name: 'Chocolate Biscuit', image: 'https://objectstorage.ap-mumbai-1.oraclecloud.com/n/softlogicbicloud/b/cdn/o/products/600-600/114800--01--1623926473.jpeg', popularity: '61%', sales: 280 },
-        { id: 3, name: 'Organic Milk Box', image: 'https://horizon.com/wp-content/uploads/horizon-organic-whole-dha-omega-3-milk.png', popularity: '52%', sales: 220 },
-        { id: 4, name: 'Chocolate Bar', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Green_and_Black%27s_dark_chocolate_bar_2.jpg/640px-Green_and_Black%27s_dark_chocolate_bar_2.jpg', popularity: '34%', sales: 180 },
-      ];
+      try {
+        const response = await fetch("http://localhost:5555/itemPurchased/topProducts");
+        const data = await response.json(); // Parse JSON content
+        console.log(data);
+        const updatedProducts = await Promise.all(
+          data.topSellingProducts.map(async (product) => {
 
-      setProducts(topProductsData);
+            if (product.productID[0]=='%'){
+              product.productID = product.productID.slice(3, -3);
+            }
+            ///const productDetailsResponse = await fetch(fetchURL +`/product/${product.productID}`);
+            const productDetailsResponse = await fetch(`http://localhost:5555/product/${product.productID}`);
+            //const productDetailsResponse = await fetch("http://localhost:5555/product/6591a6e000919e2a51ca9be9");
+            const productDetailsData = await productDetailsResponse.json();
+
+            return {
+              ...product,
+              name: productDetailsData.productName,
+              image: productDetailsData.imgURL,
+            };
+          })
+        );
+
+        setProducts(updatedProducts);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
     };
 
     fetchData();
@@ -39,12 +56,12 @@ const TopProducts = () => {
           </thead>
           <tbody>
             {products.map((product, index) => (
-              <tr key={product.id}>
+              <tr key={product.productID}>
                 <td>{index + 1}</td>
                 <td>{product.name}</td>
                 <td><img src={product.image} alt={product.name} style={{ width: '100px', height: 'auto' }} /></td>
                 <td>{product.popularity}</td>
-                <td>{product.sales}</td>
+                <td>{product.quantity}</td>
               </tr>
             ))}
           </tbody>

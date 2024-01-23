@@ -10,7 +10,8 @@ import {
     getProductsSoldToday,
     getTotalProductQuantities,
     deleteItemsPurchasedByBillId,
-    getTopSellingProducts
+    getTopSellingProducts,
+    gettopProducts
 } from "../controllers/itemPurchasedController.js";
 
 const router = express.Router();
@@ -23,8 +24,12 @@ router.get("/saletoday", getProductsSoldToday);
 // Route for get total product quantities in today
 router.get("/quantity/t", getTotalProductQuantities);
 
+router.get("/topProducts",gettopProducts);
+
 //Route for get top 3 selling products
 router.get("/topselling", getTopSellingProducts);
+
+
 
 // Route for get all purchased item
 router.get("/", getAllItemsPurchased);

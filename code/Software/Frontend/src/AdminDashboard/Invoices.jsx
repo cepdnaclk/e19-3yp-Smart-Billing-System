@@ -12,7 +12,7 @@ function Invoices() {
     discountApplied: "",
   });
 
-  const fetchURL = "https://smart-billing-system-50913e9a24e6.herokuapp.com/";
+  const fetchURL = "https://4e9eq7iw62.execute-api.ap-southeast-1.amazonaws.com/v1/";
   
   const handleUpdateInputChange = (e, id) => {
     const { name, value } = e.target;
@@ -111,7 +111,7 @@ function Invoices() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(fetchURL +  "bill/");
+        const response = await fetch("http://localhost:5555/bill/");
         const responseData = await response.json();
         console.log("Data from API:", responseData);
   
