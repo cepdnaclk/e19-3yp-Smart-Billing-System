@@ -24,7 +24,7 @@ const Dashboard = () => {
     // Fetch data when the component mounts
     const fetchSalesData = async () => {
       try {
-        const response = await axios.get("http://localhost:5555/itemPurchased/saletoday");
+        const response = await axios.get(fetchURL+ 'itemPurchased/saletoday');
         const data = response.data;
         console.log(data);  
 
@@ -41,7 +41,7 @@ const Dashboard = () => {
      // Fetch bill data when the component mounts
      const fetchBillData = async () => {
       try {
-        const response = await axios.get("http://localhost:5555/bill/today");
+        const response = await axios.get(fetchURL+'bill/today');
         const data = response.data;
         console.log(data);
 
@@ -58,7 +58,7 @@ const Dashboard = () => {
 
     const fetchProductQuantities = async () => {
       try {
-        const response = await axios.get("http://localhost:5555/itemPurchased/quantity/t");
+        const response = await axios.get(fetchURL+'itemPurchased/quantity/t');
         const data = response.data;
         console.log(data);
 
@@ -118,11 +118,11 @@ const Dashboard = () => {
               <div className="card-body">
                 <h5 className="card-title text-center">
                   <FontAwesomeIcon icon={faChartBar} size="2x" color="#1f6306" /><br /><br/>
-                  <p className="card-text">0</p>
+                  <p className="card-text">LKR {totalProductQuantities.totalcountToday}</p>
                   Product Sold
                 </h5>
                 
-                <p> 0% from yesterday</p>
+                <p>{totalProductQuantities.percentageChange} % from yesterday</p>
               </div>
             </div>
           </div>

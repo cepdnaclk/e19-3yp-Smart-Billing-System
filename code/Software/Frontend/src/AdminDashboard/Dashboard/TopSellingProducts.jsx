@@ -12,7 +12,7 @@ function TopSellingProducts() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5555/itemPurchased/topselling");
+        const response = await fetch(fetchURL+'itemPurchased/topselling');
         const data = await response.json(); // Parse JSON content
         console.log(data);
         const updatedProducts = await Promise.all(
@@ -21,9 +21,9 @@ function TopSellingProducts() {
             if (product.productID[0]=='%'){
               product.productID = product.productID.slice(3, -3);
             }
-            ///const productDetailsResponse = await fetch(fetchURL +`/product/${product.productID}`);
-            const productDetailsResponse = await fetch(`http://localhost:5555/product/${product.productID}`);
-            //const productDetailsResponse = await fetch("http://localhost:5555/product/6591a6e000919e2a51ca9be9");
+            const productDetailsResponse = await fetch(fetchURL +`product/${product.productID}`);
+            //const productDetailsResponse = await fetch(`http://localhost:5555/product/${product.productID}`);
+
             const productDetailsData = await productDetailsResponse.json();
 
             return {

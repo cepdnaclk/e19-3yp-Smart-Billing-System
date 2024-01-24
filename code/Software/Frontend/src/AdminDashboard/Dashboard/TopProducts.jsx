@@ -2,24 +2,24 @@ import React, { useEffect, useState } from 'react';
 //import './TopProducts.css';
 
 const TopProducts = () => {
+  const fetchURL = "https://4e9eq7iw62.execute-api.ap-southeast-1.amazonaws.com/v1/";
   const [products, setProducts] = useState([]);
   
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5555/itemPurchased/topProducts");
+        const response = await fetch(fetchURL+'itemPurchased/topProducts');
         const data = await response.json(); // Parse JSON content
         console.log(data);
         const updatedProducts = await Promise.all(
-          data.topSellingProducts.map(async (product) => {
+          data.topProducts.map(async (product) => {
 
             if (product.productID[0]=='%'){
               product.productID = product.productID.slice(3, -3);
             }
-            ///const productDetailsResponse = await fetch(fetchURL +`/product/${product.productID}`);
-            const productDetailsResponse = await fetch(`http://localhost:5555/product/${product.productID}`);
-            //const productDetailsResponse = await fetch("http://localhost:5555/product/6591a6e000919e2a51ca9be9");
+            const productDetailsResponse = await fetch(fetchURL +`/product/${product.productID}`);
+            //const productDetailsResponse = await fetch(`http://localhost:5555/product/${product.productID}`);
             const productDetailsData = await productDetailsResponse.json();
 
             return {

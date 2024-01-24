@@ -38,13 +38,13 @@ function Invoices() {
       });
   
       if (!response.ok) {
-        // Check if the response status is not in the range 200-299
+       
         throw new Error(`Failed to create invoice. Status: ${response.status}`);
       }
   
       const createdInvoice = await response.json();
   
-      // Check if the response has the expected structure
+
       if (createdInvoice && createdInvoice._id) {
         setInvoices([...invoices, createdInvoice]);
         setNewInvoice({}); // Clear the form after creating a new invoice
@@ -111,7 +111,7 @@ function Invoices() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5555/bill/");
+        const response = await fetch(fetchURL+ 'bill/');
         const responseData = await response.json();
         console.log("Data from API:", responseData);
   
@@ -123,7 +123,7 @@ function Invoices() {
         }
       } catch (error) {
         console.error("Error fetching invoice data:", error);
-        setInvoices([]); // Set an empty array on error
+        setInvoices([]); 
       }
     };
   
@@ -205,7 +205,7 @@ function Invoices() {
 
 
             <br/><br/> <br/>
-      <div>
+      {/* <div>
         <h5>Create New Invoice</h5>
         <form>
           <label>Amount:</label>
@@ -233,7 +233,7 @@ function Invoices() {
             Create
           </button>
         </form>
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -288,7 +288,7 @@ export async function getTopSellingProducts(request, response) {
 
         // Get items purchased today
         const itemsPurchasedToday = await ItemPurchased.find({
-            createdAt: { $gte: 2024-1-8 },
+            createdAt: { $gte: today },
         });
 
         // Calculate total quantity sold for each product
@@ -330,7 +330,7 @@ export async function gettopProducts(request, response) {
 
         // Get items purchased today
         const itemsPurchasedToday = await ItemPurchased.find({
-            createdAt: { $gte: 2024-1-8 },
+            createdAt: { $gte: today },
         });
 
         // Calculate total quantity sold for each product
@@ -351,12 +351,12 @@ export async function gettopProducts(request, response) {
             .sort(([, a], [, b]) => b - a)
             .slice(0, 5) // Get the top 5 selling products
 
-        const topSellingProducts = sortedProducts.map(([productId, quantity]) => ({
+        const topProducts = sortedProducts.map(([productId, quantity]) => ({
             productID: productId,
             quantity: quantity,
         }));
 
-         response.status(200).json({ topSellingProducts });
+         response.status(200).json({ topProducts });
        
     } catch (error) {
         console.error(error.message);

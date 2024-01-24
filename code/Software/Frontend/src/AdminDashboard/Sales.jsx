@@ -21,7 +21,7 @@ const Sales = () => {
         });
 
         const fetchDataPromises = lastTenDays.map(async (day) => {
-          const response = await axios.get( `http://localhost:5555/bill/billCountPerDay/${day}`);
+          const response = await axios.get( fetchURL+`bill/billCountPerDay/${day}`);
           return response.data.billCountSelectedDay;
           
         });
