@@ -5,7 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d685fa3-3fc1-41fe-8624-1d9d86347e03" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/group17/pos/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group17/pos/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/group17/pos/python/client.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/group17/pos/python/frame.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/group17/pos/python/image_capture.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/group17/pos/python/tempCodeRunnerFile.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/group17/pos/controllers/SalesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group17/pos/controllers/SalesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/group17/pos/python/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/group17/pos/python/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/group17/pos/python/test.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/group17/pos/python/test.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/group17/pos/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/group17/pos/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/group17/pos/controllers/DashboardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/group17/pos/controllers/DashboardController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/group17/pos/controllers/MenuController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/group17/pos/controllers/MenuController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/group17/pos/controllers/ProductsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/group17/pos/controllers/ProductsController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/group17/pos/controllers/SalesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/group17/pos/controllers/SalesController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/group17/pos/fxml/Dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/group17/pos/fxml/Dashboard.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/group17/pos/fxml/Menu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/group17/pos/fxml/Menu.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/group17/pos/fxml/Products.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/group17/pos/fxml/Products.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/group17/pos/fxml/Reports.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/group17/pos/fxml/Reports.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/group17/pos/fxml/Sales.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/group17/pos/fxml/Sales.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/group17/pos/python/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/group17/pos/python/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/group17/pos/services/PythonScriptRunner.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/group17/pos/services/PythonScriptRunner.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/group17/pos/views/ViewFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/group17/pos/views/ViewFactory.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +45,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2aa9wDUYf99cZx5w856hzvD4e5i" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -29,17 +55,37 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Main.executor": "Run",
+    "Application.pos.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+    "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/akash/Desktop/e19-3yp-Smart-Billing-System/code/Software/POS/pos",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="pos" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="org.group17.pos.Main" />
+      <module name="pos" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -49,6 +95,10 @@
       <option name="presentableId" value="Default" />
       <updated>1704546058330</updated>
       <workItem from="1704546059741" duration="7077000" />
+      <workItem from="1706119448253" duration="18000" />
+      <workItem from="1706119480578" duration="346000" />
+      <workItem from="1706119842660" duration="2193000" />
+      <workItem from="1706122230023" duration="4195000" />
     </task>
     <servers />
   </component>

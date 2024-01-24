@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -7,7 +8,12 @@
 
 <AnchorPane prefHeight="750.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group17.pos.controllers.ReportsController">
    <children>
-      <Label layoutX="304.0" layoutY="353.0" text="UNDER CONSTRUCTION..">
+      <Label layoutX="20.0" layoutY="20.0" styleClass="title" text="  Reports">
+         <graphic>
+            <FontAwesomeIconView glyphName="FILE" size="40" />
+         </graphic>
+      </Label>
+      <Label layoutX="304.0" layoutY="353.0" text="UNDER CONSTRUCTION...">
          <font>
             <Font name="Bebas Neue Bold" size="36.0" />
          </font>

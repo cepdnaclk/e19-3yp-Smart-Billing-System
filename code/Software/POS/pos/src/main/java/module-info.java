@@ -6,6 +6,8 @@ module org.group17.pos {
     requires org.xerial.sqlitejdbc;
     requires com.google.gson;
     requires org.json;
+    requires com.hivemq.client.mqtt;
+    requires com.fasterxml.jackson.databind;
 
 
     opens org.group17.pos to javafx.fxml;

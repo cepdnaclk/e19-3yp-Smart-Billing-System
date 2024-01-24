@@ -2,6 +2,8 @@ package org.group17.pos.controllers;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.hivemq.client.mqtt.MqttGlobalPublishFilter;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
@@ -15,16 +17,24 @@ import org.group17.pos.models.Test;
 import org.group17.pos.services.ApiService;
 import org.group17.pos.services.PythonScriptRunner;
 import org.json.JSONObject;
+import com.hivemq.client.mqtt.mqtt5.Mqtt5Client;
 
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+
+import static java.lang.Integer.parseInt;
 
 public class SalesController implements Initializable {
     public Label lblDate;
@@ -76,6 +86,63 @@ public class SalesController implements Initializable {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
         String formattedDate = currentDate.format(formatter);
         lblDate.setText(formattedDate);
+
+        AtomicInteger weightPrev = new AtomicInteger();
+        AtomicBoolean capture = new AtomicBoolean(true);
+        final var asyncClient = Mqtt5Client.builder() // 1
+                .identifier("async-subscriber") // 1
+                .serverHost("192.168.137.1") // 1
+                .serverPort(1883) // 1
+                .buildAsync(); // 1
+
+        asyncClient.publishes(MqttGlobalPublishFilter.ALL, publish -> { // 2
+            String payload = new String(publish.getPayloadAsBytes(), StandardCharsets.UTF_8);
+
+            try {
+                ObjectMapper objectMapper = new ObjectMapper();
+                JsonNode jsonNode = objectMapper.readTree(payload);
+
+                // Assuming the payload structure is similar to the provided JSON
+                JsonNode dataNode = jsonNode.get("data");
+                JsonNode weightMeasureNode = dataNode.get("weight_measure");
+
+                String timestamp = weightMeasureNode.get("timestamp").asText();
+                int weight = weightMeasureNode.get("weight").asInt();
+                String deviceStatus = dataNode.get("device_status").asText();
+
+                // Now you can use timestamp, weight, and deviceStatus as needed
+//                System.out.println("Timestamp: " + timestamp);
+//                System.out.println("Weight: " + weight);
+//                System.out.println("Device Status: " + deviceStatus);
+
+                if(weight == 0){
+                    capture.set(true);
+                }
+
+                if(weight >0 && (weight - weightPrev.get()) == 0 && capture.get()){
+                    System.out.println("captured");
+                    capture.set(false);
+                    scanItem();
+                }
+
+                weightPrev.set(weight);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                // Handle parsing exception
+            }
+        }); // 2
+
+        asyncClient.connect()
+                .thenCompose(connAck -> { // 4
+                    System.out.println("Successfully connected!"); // 4.1
+                    return asyncClient.subscribeWith().topicFilter("3yp_device_1/main_controller").send(); // 4.2
+                }).thenRun(() -> {
+                    System.out.println("Successfully subscribed!"); // 5
+                }).exceptionally(throwable -> { // 6
+                    System.out.println("Something went wrong!"); // 6
+                    return null; // 6
+                });
         addListeners();
     }
 
@@ -86,13 +153,14 @@ public class SalesController implements Initializable {
 
     public void scanItem() {
         // Use PythonRunner class to execute Python scripts from resources
-        String scriptName = "main.py";
+        String scriptName = "client.py";
         String result = PythonScriptRunner.runPythonScript(scriptName);
         System.out.println("Python script output:\n" + result);
         assert result != null;
         result = result.replace("\n", "").replace("\r", "");
         System.out.println("Python script output:\n" + result);
-        Pattern pattern = Pattern.compile("step\\s*(.+)");
+        if(result.length() > 1){
+        Pattern pattern = Pattern.compile("b\\s*(.+)");
 
         // Create a matcher
         Matcher matcher = pattern.matcher(result);
@@ -102,14 +170,15 @@ public class SalesController implements Initializable {
         if (matcher.find()) {
             // Extract the matched portion (group 1)
             match = matcher.group(1);
-
+            match = match.replace("'", "");
+            int matched = parseInt(match);
             // Print the result
-            System.out.println("Extracted string after 'step': " + match);
+            System.out.println("Extracted string after 'step': " + matched);
         } else {
             System.out.println("No match found.");
         }
 
-        result = match;
+        result = match;}
         assert result != null;
 //        result = result.replace("\n", "").replace("\r", "");
 
@@ -117,7 +186,7 @@ public class SalesController implements Initializable {
         String encodedResult = URLEncoder.encode(result, StandardCharsets.UTF_8);
         System.out.println("Encoded Python script output:\n" + encodedResult);
 
-        String url = "https://smart-billing-system-50913e9a24e6.herokuapp.com/product/productid/" + encodedResult;
+        String url = "http://192.168.137.1:5555/product/productid/" + encodedResult;
         JsonElement jsonResponse = ApiService.sendGetRequest(url);
 
         JsonObject jsonObject = null;
@@ -137,10 +206,11 @@ public class SalesController implements Initializable {
         productID = productID.replace("\"", "");
         String productName = String.valueOf(jsonObject.get("productName"));
         productName = productName.replace("\"", "");
-        String category = "Food";
-        String description = "Can eat";
+        String category = "Category " + productID;
+        String description = "Description " + productName;
         double unitPrice = Double.parseDouble(String.valueOf(jsonObject.get("price")));
-        int quantity = Integer.parseInt(String.valueOf(jsonObject.get("quantityInStock")));
+//        int quantity = Integer.parseInt(String.valueOf(jsonObject.get("quantityInStock")));
+        int quantity = 1;
 
         testList.add(new Test(productID, productName, category, description, unitPrice, quantity));
 
@@ -154,11 +224,14 @@ public class SalesController implements Initializable {
 
         tblSales.setItems(testList);
         total = total + (unitPrice * quantity);
-        lblTotalValue.setText(String.format("%.2f", total) + " LKR");
+        Platform.runLater(() -> {
+            lblTotalValue.setText(String.format("%.2f", total) + " LKR");
+        });
+
     }
 
     public void pay() {
-        String url = "https://smart-billing-system-50913e9a24e6.herokuapp.com/bill/";
+        String url = "http://192.168.137.1:5555/bill/";
         String encodedTotal = URLEncoder.encode(String.valueOf(total), StandardCharsets.UTF_8);
         String input = "{\"totalAmount\":\"" + encodedTotal + "\"}";
         ApiService sender = new ApiService();
@@ -183,7 +256,7 @@ public class SalesController implements Initializable {
             }
             String encodedQuantity = URLEncoder.encode(String.valueOf(quantity), StandardCharsets.UTF_8);
             System.out.println("Key: " + productID + ", Value: " + unitPrice + ", Quantity: " + quantity);
-            String url2 = "https://smart-billing-system-50913e9a24e6.herokuapp.com/itempurchased/";
+            String url2 = "http://192.168.137.1:5555/itempurchased/";
             String input2 = "{\"billID\":\"" + encodedBillID + "\",\"productID\":\"" + encodedProductID + "\", \"quantity\":\"" + encodedQuantity + "\", \"unitPrice\":\"" + encodedUnitPrice + "\"}";
             ApiService sender2 = new ApiService();
             JSONObject response2 = sender2.sendPostRequest(url2, input2);

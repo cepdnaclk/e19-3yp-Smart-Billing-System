@@ -84,7 +84,7 @@ def scan_qr_code_from_url(image_url):
         print(f"Error: {e}")
 
 # Replace 'YOUR_IMAGE_URL' with the URL of the image you want to scan
-image_url = 'http://192.168.137.165/capture'
+image_url = 'http://192.168.137.21/capture'
 
 if(scan_qr_code_from_url(image_url) == -1):
 
@@ -95,7 +95,7 @@ if(scan_qr_code_from_url(image_url) == -1):
     # Load the labels
     class_names = open("C:/Users/pasin/OneDrive/Documents/GitHub/e19-3yp-Smart-Billing-System/code/Software/POS/pos/src/main/resources/org/group17/pos/python/labels.txt", "r").readlines()
 
-    input_directory = "C:/Users/pasin/OneDrive/Documents/GitHub/e19-3yp-Smart-Billing-System/code/Software/POS/pos/src/main/resources/org/group17/pos/python/"  
+    input_directory = "C:/Users/pasin/OneDrive/Documents/GitHub/e19-3yp-Smart-Billing-System/code/Software/POS/pos/src/main/resources/org/group17/pos/python/"
 
     image_files = [f for f in os.listdir(input_directory) if f.endswith(('.jpg', '.jpeg', '.png'))]
 
@@ -111,7 +111,7 @@ if(scan_qr_code_from_url(image_url) == -1):
 
             # Show the image in a window
         # cv2.imshow("Image from Directory", image)
-            
+
             # Make the image a numpy array and reshape it to the model's input shape
         image = np.asarray(image, dtype=np.float32).reshape(1, 224, 224, 3)
 
@@ -126,12 +126,12 @@ if(scan_qr_code_from_url(image_url) == -1):
             # print(confidence_score)
 
         print(class_name[2:])
-        
+
         image_files = [f for f in os.listdir(input_directory) if f.endswith(('.jpg', '.jpeg', '.png'))]
-            
+
         keyboard_input = cv2.waitKey(1)
-    
+
         if keyboard_input == 27:
-            break        
+            break
 
     cv2.destroyAllWindows()
