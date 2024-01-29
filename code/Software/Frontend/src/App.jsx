@@ -7,7 +7,7 @@ import AdminDashboard from './AdminDashboard/AdminDashboard';
 import Dashboard from './AdminDashboard/Dashboard/Dashboard';
 import Invoices from './AdminDashboard/Invoices';
 import Sales from './AdminDashboard/Sales';
-import Security_Footage from './AdminDashboard/Security_Footage';
+
 import Device_Status from './AdminDashboard/Device_Status';
 import BillDetails from './AdminDashboard//BillDetails';
 
@@ -23,7 +23,7 @@ function App() {
               <Route path='/AdminDashboard/Invoices' element={<Invoices/>}></Route>
               <Route path="/AdminDashboard/bill/:id" element={<BillDetails/>} />
               <Route path='/AdminDashboard/Sales' element={<Sales/>}></Route> 
-              <Route path='/AdminDashboard/Security_Footage' element={<Security_Footage/>}></Route> 
+               
               <Route path='/AdminDashboard/Device_Status' element={<Device_Status/>}></Route>  
         </Route>
 

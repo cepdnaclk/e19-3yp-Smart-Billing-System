@@ -13,8 +13,7 @@ import "./Device_Status.css";
 function Device_Status() {
     const [mainControllerStatus, setMainControllerStatus] = useState("Unknown");
     const [scanControllerStatus, setScanControllerStatus] = useState("Unknown");
-    const [securityControllerStatus, setSecurityControllerStatus] =
-        useState("Unknown");
+    const [securityControllerStatus, setSecurityControllerStatus] = useState("Unknown");
 
     const statusMainClass =
         mainControllerStatus === "online" ? "text-green" : "text-red";
@@ -127,31 +126,7 @@ function Device_Status() {
                             </div>
                         </div>
                     </div>
-                    <div className="col">
-                        <div
-                            className="card square-card"
-                            style={{ backgroundColor: "white" }}
-                        >
-                            <div className="card-body_device_status">
-                                <h5 className="card-title text-center">
-                                    <FontAwesomeIcon
-                                        icon={faBarcode}
-                                        size="2x"
-                                        color="dark"
-                                    />
-                                    <br />
-                                    <br />
-                                    <br />
-                                    Scan Controller
-                                    <p
-                                        className={`card-text ${statusScanClass}`}
-                                    >
-                                        Status: {scanControllerStatus}
-                                    </p>
-                                </h5>
-                            </div>
-                        </div>
-                    </div>
+                    
                     <div className="col">
                         <div
                             className="card square-card"
