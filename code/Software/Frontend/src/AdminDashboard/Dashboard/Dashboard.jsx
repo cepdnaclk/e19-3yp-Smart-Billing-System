@@ -18,13 +18,14 @@ const Dashboard = () => {
   const [percentageChangeBills, setPercentageChangeBills] = useState(0);
 
   const [totalProductQuantities, setTotalProductQuantities] = useState(0);
-  const fetchURL = "https://4e9eq7iw62.execute-api.ap-southeast-1.amazonaws.com/v1/";
+  const fetchURL = "https://smart-billing-system-50913e9a24e6.herokuapp.com/";
 
   useEffect(() => {
     // Fetch data when the component mounts
     const fetchSalesData = async () => {
       try {
         const response = await axios.get(fetchURL+ 'itemPurchased/saletoday');
+        //const response = await axios.get('http://localhost:5555/itemPurchased/saletoday');
         const data = response.data;
         console.log(data);  
 
@@ -42,6 +43,7 @@ const Dashboard = () => {
      const fetchBillData = async () => {
       try {
         const response = await axios.get(fetchURL+'bill/today');
+        //const response = await axios.get('http://localhost:5555/bill/today');
         const data = response.data;
         console.log(data);
 
@@ -59,6 +61,7 @@ const Dashboard = () => {
     const fetchProductQuantities = async () => {
       try {
         const response = await axios.get(fetchURL+'itemPurchased/quantity/t');
+        //const response = await axios.get('http://localhost:5555/itemPurchased/quantity/t');
         const data = response.data;
         console.log(data);
 
@@ -83,25 +86,25 @@ const Dashboard = () => {
   return (
     <div>
     <div >
-      <h2>Today’s Sales</h2>
+      <h2>TODAY'S SALE</h2>
       <p>Sales Summary</p>
       <br />
       <div className="container_for_sales bg-white">
-        <div className="row row-1 row-3-md-2 g-4">
+      <div className="row row-1 row-3-md-2 g-4">
           <div className="col">
-            <div className="card square-card" style={{ backgroundColor: '#db8cd6'}}>
+            <div className="card square-card" style={{ backgroundColor: '#ed80dd'}}>
               <div className="card-body">
                 <h5 className="card-title text-center">
                   <FontAwesomeIcon icon={faDollarSign} size="2x" color="#75136f" /> <br /><br/>
                   <p className="card-text">LKR {totalSaleToday}</p>
                   Total Sales
                 </h5>
-                <p>{percentageChange.toFixed(0)}%  from yesterday</p>
+                <p>{percentageChange.toFixed(0)}% from yesterday</p>
               </div>
             </div>
           </div>
           <div className="col">
-            <div className="card square-card" style={{ backgroundColor: '#FFE4B5' }}>
+            <div className="card square-card" style={{ backgroundColor: '#f7d76d' }}>
               <div className="card-body">
 
                 <h5 className="card-title text-center">
@@ -114,15 +117,16 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="col">
-            <div className="card square-card" style={{ backgroundColor: '#90EE90', marginRight:'140px' }}>
+            <div className="card square-card" style={{ backgroundColor: '#30ff68', marginRight:'165px' }}>
               <div className="card-body">
                 <h5 className="card-title text-center">
                   <FontAwesomeIcon icon={faChartBar} size="2x" color="#1f6306" /><br /><br/>
-                  <p className="card-text">LKR {totalProductQuantities.totalcountToday}</p>
+                  <p className="card-text"> {totalProductQuantities.totalcountToday}</p>
                   Product Sold
                 </h5>
                 
-                <p>{totalProductQuantities.percentageChange} % from yesterday</p>
+                <p>{Math.floor(totalProductQuantities.percentageChange)}% from yesterday</p>
+
               </div>
             </div>
           </div>

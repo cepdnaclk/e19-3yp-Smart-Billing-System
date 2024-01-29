@@ -1,0 +1,31 @@
+.invoice-container {
+    margin-top: 30px;
+  }
+  
+  .table {
+    width: 90%;
+    height: 50%;
+    border-collapse: collapse;
+    border-radius: 30px;
+  }
+  
+  .table th,
+  .table td {
+    border: 1px solid #ffffff;
+    padding: 30px;
+    text-align: center;
+
+  }
+  
+  .table th {
+    background-color: #a1ed92;
+  }
+  
+  .table tbody tr:nth-child(even) {
+    background-color: #ffffff;
+  }
+  
+  .table tbody tr:hover {
+    background-color: #ddd;
+  }
+  

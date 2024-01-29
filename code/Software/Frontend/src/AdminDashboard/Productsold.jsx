@@ -2,10 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 //import { Line } from 'react-chartjs-2';
 import Chart from 'chart.js/auto';
-import Productsold from './Productsold';
 
 
-const Sales = () => {
+const Productsold = () => {
   const [data, setData] = useState([]);
   const [labels, setLabels] = useState([]);
   const chartRef = useRef(null);
@@ -23,8 +22,8 @@ const Sales = () => {
 
         const fetchDataPromises = lastTenDays.map(async (day) => {
           const response = await axios.get( fetchURL+`bill/billCountPerDay/${day}`);
-          //const response = await axios.get(`http://localhost:5555/bill/billCountPerDay/${day}`);
-          return response.data.billCountSelectedDay;
+          //const response = await axios.get(`http://localhost:5555/itemPurchased/salesPerDay/${day}`);
+          return response.data.totalSaleToday;
           
         });
 
@@ -49,15 +48,17 @@ const Sales = () => {
         }
 
         chartRef.current.chartInstance = new Chart(chartRef.current.getContext('2d'), {
-          type: 'line',
+          type: 'bar',
           data: {
             labels: labels,
             datasets: [
               {
-                label: 'Bill Issued Per Day (customer count)',
+                label: 'Sales Per Day (LKR)',
                 data: data,
-                fill: false,
-                borderColor: 'rgba(75,192,192,1)',
+                backgroundColor: 'rgba(255, 99, 132, 0.2)', // Change the color here
+                borderColor: 'rgba(255, 99, 132, 1)', // Border color of the bars
+                borderWidth: 1,
+                
               },
             ],
           },
@@ -79,7 +80,7 @@ const Sales = () => {
               },
               title: {
                 display: true,
-                text: 'Customer Variation',
+                text: 'Sales Variation',
               },
               layout: {
                 padding: {
@@ -93,10 +94,10 @@ const Sales = () => {
               maintainAspectRatio: false,
               elements: {
                 bar: {
-                  borderRadius: 20, // Adjust the border radius of the bars if needed
+                  borderRadius: 20,
                 },
               },
-              backgroundColor: 'lightblue', // Change the background color here
+              backgroundColor: 'lightblue', 
             },
           },
         });
@@ -108,12 +109,11 @@ const Sales = () => {
 
   return (
     <div>
-      <h2>CUSTOMER VARIATION</h2><br/>
-      <canvas ref={chartRef}></canvas><br/><br/><br/>
-      <Productsold/>
+      <h2>SALES VARIATION</h2><br/>
+      <canvas ref={chartRef}></canvas>
     </div>
   );
 };
 
-export default Sales;
+export default Productsold;
 

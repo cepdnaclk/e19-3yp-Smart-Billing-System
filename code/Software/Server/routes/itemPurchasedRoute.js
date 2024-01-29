@@ -11,13 +11,16 @@ import {
     getTotalProductQuantities,
     deleteItemsPurchasedByBillId,
     getTopSellingProducts,
-    gettopProducts
+    gettopProducts,
+    getProductsSoldperDay,
+    getItemsPurchasedByBillId
 } from "../controllers/itemPurchasedController.js";
+import { get } from "mongoose";
 
 const router = express.Router();
 router.use(cors());
 
-
+router.get("/salesPerDay/:day",getProductsSoldperDay);
 // Route for get total sale today
 router.get("/saletoday", getProductsSoldToday);
 
@@ -28,8 +31,6 @@ router.get("/topProducts",gettopProducts);
 
 //Route for get top 3 selling products
 router.get("/topselling", getTopSellingProducts);
-
-
 
 // Route for get all purchased item
 router.get("/", getAllItemsPurchased);
@@ -49,5 +50,6 @@ router.delete("/:id", deleteItemsPurchasedById);
 //Route for delete purchased item by bill id
 router.delete("/bill/:id", deleteItemsPurchasedByBillId);
 
+router.get("/bill/:id", getItemsPurchasedByBillId)
 
 export default router;

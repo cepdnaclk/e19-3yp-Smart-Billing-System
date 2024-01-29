@@ -97,7 +97,7 @@ function Device_Status() {
 
     return (
         <div>
-            <h2>Device Status</h2>
+            <h2>DEVICE STATUS</h2>
             <p>Device Summary</p>
             <br />
             <div className="container_for_sales bg-white">

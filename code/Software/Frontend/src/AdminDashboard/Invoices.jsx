@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Invoices.css";
+import { Link } from "react-router-dom";
+
 
 function Invoices() {
   const [invoices, setInvoices] = useState([]);
@@ -12,7 +14,7 @@ function Invoices() {
     discountApplied: "",
   });
 
-  const fetchURL = "https://4e9eq7iw62.execute-api.ap-southeast-1.amazonaws.com/v1/";
+  const fetchURL = "https://smart-billing-system-50913e9a24e6.herokuapp.com/";
   
   const handleUpdateInputChange = (e, id) => {
     const { name, value } = e.target;
@@ -29,6 +31,7 @@ function Invoices() {
     console.log("Creating invoice:", newInvoice);
     try {
       const response = await fetch(fetchURL + "bill/", {
+        //const response = await fetch("http://localhost:5555/bill/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -62,6 +65,7 @@ function Invoices() {
     console.log("Updated invoice data:", updateFormData);
     try {
       const response = await fetch(fetchURL + `bill/${id}`, {
+        //const response = await fetch("http://localhost:5555/bill/" + id, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -82,6 +86,7 @@ function Invoices() {
         updatedDate: updatedInvoice.createdAt,
         updatedAmount: updatedInvoice.totalAmount,
       });
+      
 
       // Set update space visible
       setUpdateSpaceVisible(true);
@@ -108,10 +113,13 @@ function Invoices() {
     }
   };
   
+  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(fetchURL+ 'bill/');
+        //const response = await fetch('http://localhost:5555/bill/');
         const responseData = await response.json();
         console.log("Data from API:", responseData);
   
@@ -131,9 +139,16 @@ function Invoices() {
   }, []);
   
   
+  function adjustDate(dateString) {
+    const date = new Date(dateString);
+    date.setHours(date.getHours() + 5); // Add 5 hours
+    date.setMinutes(date.getMinutes() + 30); // Add 30 minutes
+    return date.toISOString(); // Convert back to ISO string format for display
+  }
+  
   return (
     <div>
-      <h2>Invoices Details</h2>
+      <h2>INVOICE DETAILS</h2>
 
       <table>
         <thead>
@@ -150,7 +165,8 @@ function Invoices() {
         {invoices.map((invoice) => (
   <tr key={invoice._id}>
     <td>{invoice._id}</td>
-    <td>{invoice.createdAt}</td>
+    
+    <td>{adjustDate(invoice.createdAt)}</td>
     <td>{invoice.totalAmount}
    {/**  <form >
         
@@ -194,7 +210,11 @@ function Invoices() {
           Update
         </button>*/}
       
-      <button onClick={() => handleDelete(invoice._id)}>Delete</button>
+      
+      <Link to={`/AdminDashboard/bill/${invoice._id}`} style={{ textDecoration: 'none' }}>
+      <button>View</button>
+    </Link>
+    <button onClick={() => handleDelete(invoice._id)}>Delete</button>
     </td>
   </tr>
 ))}
@@ -205,7 +225,7 @@ function Invoices() {
 
 
             <br/><br/> <br/>
-      {/* <div>
+       {/* <div>
         <h5>Create New Invoice</h5>
         <form>
           <label>Amount:</label>
