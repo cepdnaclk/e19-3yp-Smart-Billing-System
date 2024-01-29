@@ -28,6 +28,10 @@ const productSchema = mongoose.Schema(
         imgURL: {
             type: String,
         },
+        measurable: {
+            type: Boolean,
+            required: true,
+        },
     },
     {
         timestamps: true,
