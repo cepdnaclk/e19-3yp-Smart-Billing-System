@@ -30,12 +30,14 @@ __Introducing the Smart Billing System – a revolutionary solution transforming
 Introducing the Smart Billing System, a cutting-edge solution for supermarkets designed to elevate efficiency and customer satisfaction. Features include automated barcode scanning for swift and accurate product identification, real-time inventory management with low-stock alerts, a customer feedback mechanism on digital receipts, AI-powered predictive analytics for optimizing stock levels, a weight checker for automated item weight recognition, and an AI item recognizer streamlining the billing process. Revolutionize your supermarket operations with these innovative functionalities.
 
 ## High-level Hardware Architecture
+![3yp-hardware-archi (1)](https://github.com/cepdnaclk/e19-3yp-Smart-Billing-System/assets/115539818/57a880ff-5334-47f2-8883-0b18a3acc3e9)
 
-![image](https://github.com/cepdnaclk/e19-3yp-Smart-Billing-System/assets/115539818/56622505-b6c5-41e3-8c5e-a6f891f2a56d)
+
 
 ## High-level Software Architecture
+<img width="7195" alt="CO300-High level software Architecture" src="https://github.com/cepdnaclk/e19-3yp-Smart-Billing-System/assets/115539818/595a11d8-95a9-4e7f-9b04-8df98e1d5c3f">
 
-![image](https://github.com/cepdnaclk/e19-3yp-Smart-Billing-System/assets/115539818/d822efb5-0fa5-45bd-94a2-81db9ebae9a4)
+
 
 ## Software & Hardware TechStack
 
