@@ -18,10 +18,27 @@ table {
     margin-bottom: 20px;
   }
 button{
-    width: 100%;
+    width: 50%;
 }  
 .customButton {
     
     max-width: 200px
     /* Add more styles as needed */
   }
+  table {
+    border-collapse: collapse; 
+    border: 2px solid green; 
+  }
+  
+  th, td {
+    border: 1px solid green; 
+    padding: 8px; 
+    text-align: center; 
+    vertical-align: middle;
+  }
+  
+  th {
+    color: rgb(11, 56, 11); 
+    background-color: lightgreen; 
+  }
+  

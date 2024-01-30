@@ -7,12 +7,13 @@ import './TopSellingProduct.css'
 function TopSellingProducts() {
   const [topSellingProducts, setTopSellingProducts] = useState([]);
 
-  const fetchURL = "https://4e9eq7iw62.execute-api.ap-southeast-1.amazonaws.com/v1/";
+  const fetchURL = "https://smart-billing-system-50913e9a24e6.herokuapp.com/";
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(fetchURL+'itemPurchased/topselling');
+        //const response = await fetch('http://localhost:5555/itemPurchased/topselling');
         const data = await response.json(); // Parse JSON content
         console.log(data);
         const updatedProducts = await Promise.all(
@@ -45,18 +46,18 @@ function TopSellingProducts() {
 
     return (
         <div >
-<h2>Top Selling Products</h2>
+<h2>TOP SELLING PRODUCTS</h2>
 <p>View and Manage your top selling products</p>
 <br />
 <div className="container_for_topselling bg-white">
   <div className="row row-1 row-3-md-2 g-4" style={{flexWrap: 'nowrap', gap: '1px'}}>
   {topSellingProducts.map((product) => (
             <div key={product.productID} className="col">
-              <div className="card square-card_topselling">
+              <div className="card square-card_topselling" style={{border:'green'}}>
                 <img src={product.image} alt={product.name} className="card-img-top" />
                 <div className="card-body_topselling">
-                  <p className="card-text">{product.name}</p>
-                  <p className="card-text">Sold count: {product.quantity}</p>
+                  <b><p className="card-text text-green">{product.name}</p>
+                  <p className="card-text text-green">Sold count: {product.quantity}</p></b>
                 </div>
               </div>
             </div>

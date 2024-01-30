@@ -77,7 +77,8 @@ export async function saveNewProduct(request, response) {
         if (
             !request.body.productName ||
             !request.body.price ||
-            !request.body.quantityInStock
+            !request.body.quantityInStock ||
+            !request.body.measurable
         ) {
             return response.status(400).send({
                 message: `Send all required fields: product Name, product Id, price, quantityInStock`,
@@ -92,6 +93,7 @@ export async function saveNewProduct(request, response) {
             productID: productId,
             price: request.body.price,
             quantityInStock: request.body.quantityInStock,
+            measurable: request.body.measurable,
         };
 
         const product = await Product.create(newProduct);

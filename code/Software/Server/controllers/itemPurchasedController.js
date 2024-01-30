@@ -24,7 +24,7 @@ export async function getProductsSoldToday(request, response) {
         yesterday.setDate(today.getDate() - 1);
 
         const itemsPurchasedYesterday = await ItemPurchased.find({
-            createdAt: { $gte: yesterday, $lt: today },
+            createdAt: { $gte: yesterday, $lt: today},
         });
 
         // Calculate total sale for yesterday
@@ -220,7 +220,7 @@ export const getTotalProductQuantities = async (request, response) => {
     
             // Get items purchased today
             const itemsPurchasedToday = await ItemPurchased.find({
-                createdAt: { $gte: today },
+                createdAt: { $gte: today},
             });
     
             // Calculate total product count for today
@@ -330,7 +330,7 @@ export async function gettopProducts(request, response) {
 
         // Get items purchased today
         const itemsPurchasedToday = await ItemPurchased.find({
-            createdAt: { $gte: today },
+            createdAt: { $gte:today  },
         });
 
         // Calculate total quantity sold for each product
@@ -362,5 +362,63 @@ export async function gettopProducts(request, response) {
         console.error(error.message);
         response.status(500).json({ error: `An error occurred: ${error.message}` });
     }
-};
+}
 
+export async function getProductsSoldperDay(request, response) {
+    try {
+        const { day } = request.params;
+      
+        // Parse the day parameter to a Date object
+        const selectedDay = new Date(day);
+        selectedDay.setHours(0, 0, 0, 0); // Set hours, minutes, seconds, and milliseconds to 0
+  
+
+        // Get items purchased today
+        const itemsPurchasedToday = await ItemPurchased.find({
+            createdAt: { $gte: selectedDay , $lt: new Date(selectedDay.getTime() + 24 * 60 * 60 * 1000)},
+        });
+
+        // Calculate total sale today
+        const totalSaleToday = itemsPurchasedToday.reduce(
+            (acc, item) => acc + item.quantity * item.unitPrice,
+            0
+        );
+
+        response.status(200).json({ totalSaleToday });
+    } catch (error) {
+        console.error(error.message);
+        response.status(500).json({ error: `An error occurred: ${error.message}` });
+    }
+}
+
+export async function getItemsPurchasedByBillId(request, response) {
+
+    try {
+        const { id } = request.params;
+
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return response.status(400).send({
+                message: `Invalid bill id`,
+            });
+        }
+
+        const itemsPurchased = await ItemPurchased.find({ billID: id }).exec();
+        console.log(itemsPurchased);
+
+        if (itemsPurchased) {
+            return response.status(200).json(itemsPurchased);
+            
+        } else {
+            return response
+                .status(404)
+                .json({ message: "Purchased item not found." });
+        }
+    } catch (error) {
+        console.log(error.message);
+        return response
+            .status(500)
+            .json({
+                error: "An error occurred while fetching purchased items.",
+            });
+    }
+};
