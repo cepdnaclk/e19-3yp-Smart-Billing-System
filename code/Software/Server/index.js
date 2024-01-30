@@ -2,7 +2,6 @@ import express from "express";
 import { PORT } from "./config/app.js";
 import cors from "cors";
 
-
 import connection from "./config/database.js";
 // Gives us access to variables set in the .env file via `process.env.VARIABLE_NAME` syntax
 import "dotenv/config";
