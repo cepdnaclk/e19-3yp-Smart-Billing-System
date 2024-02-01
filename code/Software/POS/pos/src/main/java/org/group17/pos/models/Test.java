@@ -9,14 +9,14 @@ public class Test {
     private int quantity;
     private double amount;
 
-    public Test(String productID, String productName, String category, String description, double unitPrice, int quantity) {
+    public Test(String productID, String productName, String category, double unitPrice, int quantity, double amount) {
         this.productID = productID;
         this.productName = productName;
         this.category = category;
-        this.description = description;
+//        this.description = description;
         this.unitPrice = unitPrice;
         this.quantity = quantity;
-        this.amount = quantity * unitPrice;
+        this.amount = amount;
     }
 
     public String getProductID() {
@@ -31,9 +31,9 @@ public class Test {
         return category;
     }
 
-    public String getDescription() {
-        return description;
-    }
+//    public String getDescription() {
+//        return description;
+//    }
 
     public double getUnitPrice() {
         return unitPrice;

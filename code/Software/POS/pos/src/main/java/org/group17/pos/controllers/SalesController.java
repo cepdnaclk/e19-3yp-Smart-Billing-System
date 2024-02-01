@@ -42,7 +42,7 @@ public class SalesController implements Initializable {
     public TableColumn<Test, String> colProductID;
     public TableColumn<Test, String> colProductName;
     public TableColumn<Test, String> colCategory;
-    public TableColumn<Test, String> colDescription;
+//    public TableColumn<Test, String> colDescription;
     public TableColumn<Test, Double> colUnitPrice;
     public TableColumn<Test, Integer> colQuantity;
     public TableColumn<Test, Double> colAmount;
@@ -115,14 +115,14 @@ public class SalesController implements Initializable {
 //                System.out.println("Weight: " + weight);
 //                System.out.println("Device Status: " + deviceStatus);
 
-                if(weight == 0){
+                if(weight < 5){
                     capture.set(true);
                 }
 
-                if(weight >0 && (weight - weightPrev.get()) == 0 && capture.get()){
+                if(weight >5 && (weight - weightPrev.get()) == 0 && capture.get()){
                     System.out.println("captured");
                     capture.set(false);
-                    scanItem();
+                    scanItem(weight);
                 }
 
                 weightPrev.set(weight);
@@ -147,11 +147,11 @@ public class SalesController implements Initializable {
     }
 
     private void addListeners() {
-        btnScanItem.setOnAction(event -> scanItem());
+//        btnScanItem.setOnAction(event -> scanItem());
         btnPay.setOnAction(event -> pay());
     }
 
-    public void scanItem() {
+    public void scanItem(int weightValue) {
         // Use PythonRunner class to execute Python scripts from resources
         String scriptName = "client.py";
         String result = PythonScriptRunner.runPythonScript(scriptName);
@@ -207,23 +207,36 @@ public class SalesController implements Initializable {
         String productName = String.valueOf(jsonObject.get("productName"));
         productName = productName.replace("\"", "");
         String category = "Category " + productID;
-        String description = "Description " + productName;
-        double unitPrice = Double.parseDouble(String.valueOf(jsonObject.get("price")));
-//        int quantity = Integer.parseInt(String.valueOf(jsonObject.get("quantityInStock")));
+//        String description = "Description " + productName;
+        boolean measurable1 = Boolean.parseBoolean(String.valueOf(jsonObject.get(" measurable")));
+        boolean measurable2 = Boolean.parseBoolean(String.valueOf(jsonObject.get("measurable")));
+        System.out.println(Boolean.parseBoolean(String.valueOf(jsonObject.get("measurable"))));
+        System.out.println(measurable1);
+        System.out.println(measurable2);
         int quantity = 1;
 
-        testList.add(new Test(productID, productName, category, description, unitPrice, quantity));
+//        double unitPrice;
+        double unitPrice = Double.parseDouble(String.valueOf(jsonObject.get("price")));
+        double amount = unitPrice;
+        if (measurable1 || measurable2) {
+            amount = weightValue * unitPrice;
+            quantity = weightValue;
+            }
+
+//        int quantity = Integer.parseInt(String.valueOf(jsonObject.get("quantityInStock")));
+        amount = Math.round(amount * 100.0) / 100.0;
+        testList.add(new Test(productID, productName, category, unitPrice, quantity, amount));
 
         colProductID.setCellValueFactory(new PropertyValueFactory<>("productID"));
         colProductName.setCellValueFactory(new PropertyValueFactory<>("productName"));
         colCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
-        colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+//        colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
         colUnitPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
         colQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         colAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
 
         tblSales.setItems(testList);
-        total = total + (unitPrice * quantity);
+        total = total + amount;
         Platform.runLater(() -> {
             lblTotalValue.setText(String.format("%.2f", total) + " LKR");
         });

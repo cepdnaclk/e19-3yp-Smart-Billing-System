@@ -33,9 +33,9 @@
                 <TableColumn fx:id="colProductID" prefWidth="75.0" text="Product ID" />
                 <TableColumn fx:id="colProductName" prefWidth="75.0" text="Product Name" />
                 <TableColumn fx:id="colCategory" prefWidth="75.0" text="Category" />
-                <TableColumn fx:id="colDescription" prefWidth="75.0" text="Description" />
+<!--                <TableColumn fx:id="colDescription" prefWidth="75.0" text="Description" />-->
                 <TableColumn fx:id="colUnitPrice" prefWidth="75.0" text="Unit Price (LKR)" />
-                <TableColumn fx:id="colQuantity" prefWidth="75.0" text="Quantity" />
+                <TableColumn fx:id="colQuantity" prefWidth="75.0" text="Quantity / Weight(g)" />
                 <TableColumn fx:id="colAmount" prefWidth="75.0" text="Amount (LKR)" />
             </columns>
             <columnResizePolicy>
